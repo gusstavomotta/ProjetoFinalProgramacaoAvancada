@@ -29,7 +29,6 @@ public class TrabPa {
         Iterator<Map.Entry<String, JsonNode>> campos = req.Requisicao();
 
         Conexao conn = new Conexao();
-        conn.getConexao();
 
         while (campos.hasNext()) {
             Map.Entry<String, JsonNode> campo = campos.next();
@@ -43,11 +42,10 @@ public class TrabPa {
                         asteroide.get("estimated_diameter").get("kilometers").get("estimated_diameter_max").asText(), asteroide.get("is_potentially_hazardous_asteroid").asBoolean(),
                         proximidade.get("close_approach_date").asText(), proximidade.get("relative_velocity").get("kilometers_per_hour").asDouble());
                 
-                System.out.println(objetoVoador.toString());
                 ObjetoVoadorDao dao = new ObjetoVoadorDao();
-                dao.inserirNoBanco(objetoVoador);
+                dao.inserirNoBanco(objetoVoador, conn);
             }
         }
-
+        
     }
 }

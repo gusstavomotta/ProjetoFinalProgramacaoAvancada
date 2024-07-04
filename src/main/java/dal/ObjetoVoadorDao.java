@@ -14,14 +14,8 @@ import model.ObjetoVoador;
  */
 public class ObjetoVoadorDao {
 
-    Conexao conn;
 
-    public ObjetoVoadorDao() throws ClassNotFoundException, SQLException {
-
-        this.conn = new Conexao();
-    }
-
-    public void inserirNoBanco(ObjetoVoador obj) throws SQLException {
+    public void inserirNoBanco(ObjetoVoador obj, Conexao conn) throws SQLException {
 
         PreparedStatement st;
         String query = "INSERT INTO objeto_voador (id,data,nome,diametroMinKm,diametroMaxKm,risco,dataDeAproximacao,velocidadeAproxKm) VALUES (?,?,?,?,?,?,?,?);";
