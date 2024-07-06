@@ -15,10 +15,11 @@ import java.util.Iterator;
 import java.util.Map;
 import br.com.unisc.trabpa.model.ObjetoVoador;
 import br.com.unisc.trabpa.model.Relogio;
+import javax.management.BadAttributeValueExpException;
 
 public class app {
 
-    public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
+    public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, SQLException, BadAttributeValueExpException {
 
         String dataInicio = "2024-07-01";
         String dataFim = "2024-07-08";
@@ -34,36 +35,35 @@ public class app {
         
         
         
-        //Relogio relogio = new Relogio();
-        //ObjetoVoadorDao dao = new ObjetoVoadorDao();
-        //Grafico graf = new Grafico();
+        Relogio relogio = new Relogio();
+        Grafico graf = new Grafico();
         //Requisicao req = new Requisicao();
 
-        //ArrayList<ArrayList<ObjetoVoador>> matriz = new ArrayList<>();
-        //String dataInicial = "2024-07-06"; // Substitua pela data inicial desejada
+        ArrayList<ArrayList<ObjetoVoador>> matriz = new ArrayList<>();
+        String dataInicial = "2024-07-06"; // Substitua pela data inicial desejada
 
         // Gera os dados e obtém as datas e a matriz de dados
-        //DadosGrafico dadosGrafico = graf.geraDados(matriz, dataInicial, conn);
+        DadosGrafico dadosGrafico = graf.geraDados(matriz, dataInicial);
 
         // Chama o método geraGrafico com os dados gerados
-        //Grafico.geraGrafico(dadosGrafico.getDias(), dadosGrafico.getMatriz());
-//        System.out.println("OBJETOS FILTRADOS");
-//        ArrayList<ObjetoVoador> objetosFiltrados = dao.listarObjetosPorAtributo(conn, "risco", "1");
-//        for (int i = 0; i < objetosFiltrados.size(); i++) {
-//            System.out.println(objetosFiltrados.get(i).toString());
-//        }
-//
-//        System.out.println("OBJETOS ORDENADOS POR ATRIBUTO");
-//        ArrayList<ObjetoVoador> objetosOrdenados = dao.ordernarObjetosPorAtributo(conn, "data");
-//        for (int i = 0; i < objetosOrdenados.size(); i++) {
-//            System.out.println(objetosOrdenados.get(i).toString());
-//        }
-//
-//        System.out.println("OBJETOS PRÓXIMOS");
-//        ArrayList<ObjetoVoador> objetosProximos = dao.listarObjetosProximos(conn, relogio.getDataAtual());
-//        for (int i = 0; i < objetosProximos.size(); i++) {
-//            System.out.println(objetosProximos.get(i).toString());
-//        }
+        Grafico.geraGrafico(dadosGrafico.getDias(), dadosGrafico.getMatriz());
+        System.out.println("OBJETOS FILTRADOS");
+        ArrayList<ObjetoVoador> objetosFiltrados = dao.listarObjetosPorAtributo("risco", "1");
+        for (int i = 0; i < objetosFiltrados.size(); i++) {
+            System.out.println(objetosFiltrados.get(i).toString());
+        }
+
+        System.out.println("OBJETOS ORDENADOS POR ATRIBUTO");
+        ArrayList<ObjetoVoador> objetosOrdenados = dao.ordernarObjetosPorAtributo("data");
+        for (int i = 0; i < objetosOrdenados.size(); i++) {
+            System.out.println(objetosOrdenados.get(i).toString());
+        }
+
+        System.out.println("OBJETOS PRÓXIMOS");
+        ArrayList<ObjetoVoador> objetosProximos = dao.listarObjetosProximos(relogio.getDataAtual());
+        for (int i = 0; i < objetosProximos.size(); i++) {
+            System.out.println(objetosProximos.get(i).toString());
+        }
 
     }
 }

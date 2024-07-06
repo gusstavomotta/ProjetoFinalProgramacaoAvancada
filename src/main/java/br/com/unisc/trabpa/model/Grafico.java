@@ -61,7 +61,7 @@ public class Grafico {
         axis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
 
         try {
-            ChartUtilities.saveChartAsJPEG(new File("C:\\Users\\caiok\\OneDrive\\Documentos\\GitHub\\TrabPa1\\src\\main\\java\\view\\grafObjVoador.jpg"), chart, 500, 300);
+            ChartUtilities.saveChartAsJPEG(new File("C:\\Users\\caiok\\OneDrive\\Documentos\\GitHub\\TrabPa1\\src\\main\\java\\view\\grafObjVoador.jpg"), chart, 1080, 720);
         } catch (IOException exc) {
             System.err.println("Erro ao gerar a imagem");
         }
@@ -92,7 +92,7 @@ public class Grafico {
         return list;
     }
 
-    public DadosGrafico geraDados(ArrayList<ArrayList<ObjetoVoador>> matriz, String d, Conexao conn) throws SQLException {
+    public DadosGrafico geraDados(ArrayList<ArrayList<ObjetoVoador>> matriz, String d) throws SQLException {
         DateTimeFormatter parser = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate data = LocalDate.parse(d, parser).minusDays(3);
         ArrayList<LocalDate> dias = new ArrayList<>();
@@ -100,6 +100,7 @@ public class Grafico {
 
         for (int i = 0; i < 7; i++) {
             LocalDate currentDay = data.plusDays(i);
+            dias.add(currentDay);
             matriz.add(g.dadosData(currentDay));
         }
 
