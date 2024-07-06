@@ -3,5 +3,6 @@ dal\Grafico.class
 com\mycompany\trabpa\TrabPa.class
 dal\Conexao.class
 model\Relogio.class
+dal\DadosGrafico.class
 dal\ObjetoVoadorDao.class
 model\ObjetoVoador.class

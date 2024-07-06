@@ -1,4 +1,4 @@
-package model;
+package dal;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
