@@ -44,10 +44,11 @@ public class ObjetoVoadorDao {
     public ArrayList<ObjetoVoador> listarComFiltro(Conexao conn, String atributo, String valor) throws SQLException {
 
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
-        String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " = " + valor;
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            try (ResultSet rs = pstmt.executeQuery()) {
+        String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " = ?;";
+        PreparedStatement st = conn.prepareStatement(sql);
+        st.setString(1, valor);
+            
+        try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
                     ObjetoVoador obj = new ObjetoVoador(
                             rs.getString("id"),
@@ -64,7 +65,6 @@ public class ObjetoVoadorDao {
                 }
 
             }
-        }
 
         return listObj;
     }
@@ -73,8 +73,8 @@ public class ObjetoVoadorDao {
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
         String sql = "SELECT * FROM objeto_voador ORDER BY " + atributo + ";";
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            try (ResultSet rs = pstmt.executeQuery()) {
+       PreparedStatement st = conn.prepareStatement(sql);
+            try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
                     ObjetoVoador obj = new ObjetoVoador(
                             rs.getString("id"),
@@ -91,7 +91,6 @@ public class ObjetoVoadorDao {
                 }
 
             }
-        }
 
         return listObj;
     }
