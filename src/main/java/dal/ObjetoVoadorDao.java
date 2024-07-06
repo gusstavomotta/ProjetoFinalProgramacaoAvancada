@@ -5,7 +5,9 @@
 package dal;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.ObjetoVoador;
 
 /**
@@ -13,7 +15,6 @@ import model.ObjetoVoador;
  * @author Gustavo Motta
  */
 public class ObjetoVoadorDao {
-
 
     public void inserirNoBanco(ObjetoVoador obj, Conexao conn) throws SQLException {
 
@@ -39,4 +40,32 @@ public class ObjetoVoadorDao {
 
     }
 
+    public ArrayList<ObjetoVoador> listarComFiltro(Conexao conn, String atributo, String valor) throws SQLException {
+        ArrayList<ObjetoVoador> listObj = new ArrayList<>();
+        // Concatenar o atributo diretamente na string SQL
+        String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " LIKE " + valor;
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            System.out.println(sql);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    ObjetoVoador obj = new ObjetoVoador(
+                            rs.getString("id"),
+                            rs.getString("data"),
+                            rs.getString("nome"),
+                            rs.getString("diametroMinKm"),
+                            rs.getString("diametroMaxKm"),
+                            rs.getBoolean("risco"),
+                            rs.getString("dataDeAproximacao"),
+                            rs.getDouble("velocidadeAproxKm")
+                    );
+                    listObj.add(obj);
+                    System.out.println(obj.toString());
+                }
+                // Fechando os recursos (opcional, mas recomendado)
+            }
+        }
+
+        return listObj;
+    }
 }

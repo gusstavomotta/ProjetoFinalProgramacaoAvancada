@@ -23,6 +23,7 @@ public class TrabPa {
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
         
         Relogio data = new Relogio();
+         ObjetoVoadorDao dao = new ObjetoVoadorDao();
         System.out.println(data.getDataHoraAtual());
 
         Requisicao req = new Requisicao();
@@ -36,16 +37,17 @@ public class TrabPa {
 
             for (JsonNode asteroide : arrayDeAsteroides) {
                 JsonNode proximidade = asteroide.get("close_approach_data").get(0);
-
-                ObjetoVoador objetoVoador = new ObjetoVoador(campo.getKey(), asteroide.get("id").asText(), asteroide.get("name").asText(),
+                
+                ObjetoVoador objetoVoador = new ObjetoVoador(asteroide.get("id").asText(),campo.getKey(), asteroide.get("name").asText(),
                         asteroide.get("estimated_diameter").get("kilometers").get("estimated_diameter_min").asText(),
                         asteroide.get("estimated_diameter").get("kilometers").get("estimated_diameter_max").asText(), asteroide.get("is_potentially_hazardous_asteroid").asBoolean(),
                         proximidade.get("close_approach_date").asText(), proximidade.get("relative_velocity").get("kilometers_per_hour").asDouble());
                 
-                ObjetoVoadorDao dao = new ObjetoVoadorDao();
+               
                 dao.inserirNoBanco(objetoVoador, conn);
             }
         }
+        System.out.println(dao.listarComFiltro(conn, "risco", "1"));
         
     }
 }

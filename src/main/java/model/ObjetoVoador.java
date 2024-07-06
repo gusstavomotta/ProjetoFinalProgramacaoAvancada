@@ -14,11 +14,11 @@ public class ObjetoVoador {
 
     @Override
     public String toString() {
-        return "ObjetoVoador{" + "data=" + data + ", id=" + id + ", nome=" + nome + ", diametroMinKm=" + diametroMinKm + ", diametroMaxKm=" + diametroMaxKm + ", risco=" + risco + ", dataDeAproximacao=" + dataDeAproximacao + ", velocidadeAproxKm=" + velocidadeAproxKm + '}';
+        return "ObjetoVoador{" +"id=" + id + ", data=" + data + ", nome=" + nome + ", diametroMinKm=" + diametroMinKm + ", diametroMaxKm=" + diametroMaxKm + ", risco=" + risco + ", dataDeAproximacao=" + dataDeAproximacao + ", velocidadeAproxKm=" + velocidadeAproxKm + '}';
     }
-
-    private String data;
+    
     private String id;
+    private String data;
     private String nome;
     private String diametroMinKm;
     private String diametroMaxKm;
@@ -27,9 +27,10 @@ public class ObjetoVoador {
     private double velocidadeAproxKm;
     
 
-    public ObjetoVoador(String data, String id, String nome, String diametroMinKm, String diametroMaxKm, Boolean risco, String dataDeAproximacao, double velocidadeAproxKm) {
-        this.data = data;
+    public ObjetoVoador( String id, String data, String nome, String diametroMinKm, String diametroMaxKm, Boolean risco, String dataDeAproximacao, double velocidadeAproxKm) {
+        
         this.id = id;
+        this.data = data;
         this.nome = nome;
         this.diametroMinKm = diametroMinKm;
         this.diametroMaxKm = diametroMaxKm;
