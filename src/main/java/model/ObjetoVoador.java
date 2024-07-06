@@ -5,30 +5,22 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.ArrayList;
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class ObjetoVoador {
 
-    @Override
-    public String toString() {
-        return "ObjetoVoador{" +"id=" + id + ", data=" + data + ", nome=" + nome + ", diametroMinKm=" + diametroMinKm + ", diametroMaxKm=" + diametroMaxKm + ", risco=" + risco + ", dataDeAproximacao=" + dataDeAproximacao + ", velocidadeAproxKm=" + velocidadeAproxKm + '}';
-    }
-    
-    private String id;
-    private String data;
-    private String nome;
-    private String diametroMinKm;
-    private String diametroMaxKm;
-    private Boolean risco;
-    private String dataDeAproximacao;
-    private double velocidadeAproxKm;
-    
+    private final String id;
+    private final String data;
+    private final String nome;
+    private final String diametroMinKm;
+    private final String diametroMaxKm;
+    private final Boolean risco;
+    private final String dataDeAproximacao;
+    private final double velocidadeAproxKm;
 
-    public ObjetoVoador( String id, String data, String nome, String diametroMinKm, String diametroMaxKm, Boolean risco, String dataDeAproximacao, double velocidadeAproxKm) {
-        
+    public ObjetoVoador(String id, String data, String nome, String diametroMinKm, String diametroMaxKm, Boolean risco, String dataDeAproximacao, double velocidadeAproxKm) {
+
         this.id = id;
         this.data = data;
         this.nome = nome;
@@ -69,6 +61,20 @@ public class ObjetoVoador {
 
     public double getVelocidadeAproxKm() {
         return velocidadeAproxKm;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID: ").append(id);
+        sb.append("\nData: ").append(data);
+        sb.append("\nNome: ").append(nome);
+        sb.append("\nDiâmetro mínimo em KM: ").append(diametroMinKm);
+        sb.append("\nDiâmetro máximo em KM: ").append(diametroMaxKm);
+        sb.append("\nRisco: ").append(risco);
+        sb.append("\nData de aproximação: ").append(dataDeAproximacao);
+        sb.append("\nVelocidade de aproximação em KM/H: ").append(velocidadeAproxKm);
+        return sb.toString();
     }
 
 }

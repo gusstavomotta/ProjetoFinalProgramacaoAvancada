@@ -20,21 +20,20 @@ import java.util.Map;
  */
 public class Requisicao {
 
-    private String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2024-07-01&end_date=2024-07-08&api_key=MAnTYyY6fOQEl5cOoVJjJY1dhJQDrXxqWb20K7Jj";
+    public Iterator<Map.Entry<String, JsonNode>> Requisicao(String dataInicio, String dataFim) throws IOException, InterruptedException {
 
-    public Iterator<Map.Entry<String, JsonNode>> Requisicao() throws IOException, InterruptedException {
+        String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + dataInicio + "end_date=" + dataFim + "&api_key=MAnTYyY6fOQEl5cOoVJjJY1dhJQDrXxqWb20K7Jj";
 
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = (HttpRequest) HttpRequest.newBuilder().uri(URI.create(this.url)).build();
+        HttpRequest request = (HttpRequest) HttpRequest.newBuilder().uri(URI.create(url)).build();
         HttpResponse<String> resposta = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         ObjectMapper mapper = new ObjectMapper();
         JsonNode raiz = mapper.readTree(resposta.body());
         JsonNode objetosProximos = raiz.get("near_earth_objects");
-        
 
         Iterator<Map.Entry<String, JsonNode>> campos = objetosProximos.fields();
-        
+
         return campos;
 
     }

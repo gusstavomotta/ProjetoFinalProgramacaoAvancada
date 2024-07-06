@@ -47,24 +47,23 @@ public class ObjetoVoadorDao {
         String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " = ?;";
         PreparedStatement st = conn.prepareStatement(sql);
         st.setString(1, valor);
-            
-        try (ResultSet rs = st.executeQuery()) {
-                while (rs.next()) {
-                    ObjetoVoador obj = new ObjetoVoador(
-                            rs.getString("id"),
-                            rs.getString("data"),
-                            rs.getString("nome"),
-                            rs.getString("diametroMinKm"),
-                            rs.getString("diametroMaxKm"),
-                            rs.getBoolean("risco"),
-                            rs.getString("dataDeAproximacao"),
-                            rs.getDouble("velocidadeAproxKm")
-                    );
-                    listObj.add(obj);
 
-                }
+        try (ResultSet rs = st.executeQuery()) {
+            while (rs.next()) {
+                ObjetoVoador obj = new ObjetoVoador(
+                        rs.getString("id"),
+                        rs.getString("data"),
+                        rs.getString("nome"),
+                        rs.getString("diametroMinKm"),
+                        rs.getString("diametroMaxKm"),
+                        rs.getBoolean("risco"),
+                        rs.getString("dataDeAproximacao"),
+                        rs.getDouble("velocidadeAproxKm")
+                );
+                listObj.add(obj);
 
             }
+        }
 
         return listObj;
     }
@@ -73,24 +72,23 @@ public class ObjetoVoadorDao {
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
         String sql = "SELECT * FROM objeto_voador ORDER BY " + atributo + ";";
 
-       PreparedStatement st = conn.prepareStatement(sql);
-            try (ResultSet rs = st.executeQuery()) {
-                while (rs.next()) {
-                    ObjetoVoador obj = new ObjetoVoador(
-                            rs.getString("id"),
-                            rs.getString("data"),
-                            rs.getString("nome"),
-                            rs.getString("diametroMinKm"),
-                            rs.getString("diametroMaxKm"),
-                            rs.getBoolean("risco"),
-                            rs.getString("dataDeAproximacao"),
-                            rs.getDouble("velocidadeAproxKm")
-                    );
-                    listObj.add(obj);
-
-                }
+        PreparedStatement st = conn.prepareStatement(sql);
+        try (ResultSet rs = st.executeQuery()) {
+            while (rs.next()) {
+                ObjetoVoador obj = new ObjetoVoador(
+                        rs.getString("id"),
+                        rs.getString("data"),
+                        rs.getString("nome"),
+                        rs.getString("diametroMinKm"),
+                        rs.getString("diametroMaxKm"),
+                        rs.getBoolean("risco"),
+                        rs.getString("dataDeAproximacao"),
+                        rs.getDouble("velocidadeAproxKm")
+                );
+                listObj.add(obj);
 
             }
+        }
 
         return listObj;
     }
@@ -117,7 +115,6 @@ public class ObjetoVoadorDao {
                 listObj.add(obj);
 
             }
-
         }
 
         return listObj;
