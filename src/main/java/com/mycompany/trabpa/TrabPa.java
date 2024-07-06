@@ -23,22 +23,22 @@ public class TrabPa {
 
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
 
-        Relogio data = new Relogio();
+        Relogio relogio = new Relogio();
         ObjetoVoadorDao dao = new ObjetoVoadorDao();
         Requisicao req = new Requisicao();
 
         String dataInicio = "2024-07-01";
         String dataFim = "2024-07-08";
 
-        Iterator<Map.Entry<String, JsonNode>> campos = req.Requisicao(dataInicio, dataFim);
+        Iterator<Map.Entry<String, JsonNode>> dadosRequisicao = req.chamaApi(dataInicio, dataFim);
 
         Conexao conn = new Conexao();
         int contador = 0;
-        while (campos.hasNext()) {
-            Map.Entry<String, JsonNode> campo = campos.next();
-            JsonNode arrayDeAsteroides = campo.getValue();
+        while (dadosRequisicao.hasNext()) {
+            Map.Entry<String, JsonNode> campo = dadosRequisicao.next();
+            JsonNode listaDeObjetos = campo.getValue();
 
-            for (JsonNode asteroide : arrayDeAsteroides) {
+            for (JsonNode asteroide : listaDeObjetos) {
                 JsonNode proximidade = asteroide.get("close_approach_data").get(0);
 
                 ObjetoVoador objetoVoador = new ObjetoVoador(asteroide.get("id").asText(), campo.getKey(), asteroide.get("name").asText(),
@@ -46,23 +46,23 @@ public class TrabPa {
                         asteroide.get("estimated_diameter").get("kilometers").get("estimated_diameter_max").asText(), asteroide.get("is_potentially_hazardous_asteroid").asBoolean(),
                         proximidade.get("close_approach_date").asText(), proximidade.get("relative_velocity").get("kilometers_per_hour").asDouble());
 
-                dao.inserirNoBanco(objetoVoador, conn);
+                dao.inserirObjetoVoadorNoBanco(objetoVoador, conn);
                 contador++;
             }
         }
 
         System.out.println("OBJETOS FILTRADOS");
-        ArrayList<ObjetoVoador> objetosFiltrados = dao.listarComFiltro(conn, "risco", "1");
+        ArrayList<ObjetoVoador> objetosFiltrados = dao.listarObjetosPorAtributo(conn, "risco", "1");
         for (int i = 0; i < objetosFiltrados.size(); i++) {
             System.out.println(objetosFiltrados.get(i).toString());
         }
         System.out.println("OBJETOS ORDENADOS POR ATRIBUTO");
-        ArrayList<ObjetoVoador> objetosOrdenados = dao.ordenarPorAtributo(conn, "data");
+        ArrayList<ObjetoVoador> objetosOrdenados = dao.ordernarObjetosPorAtributo(conn, "data");
         for (int i = 0; i < objetosOrdenados.size(); i++) {
             System.out.println(objetosOrdenados.get(i).toString());
         }
         System.out.println("OBJETOS PRÓXIMOS");
-        ArrayList<ObjetoVoador> objetosProximos = dao.listarObjetosProximos(conn, data.getDataAtual());
+        ArrayList<ObjetoVoador> objetosProximos = dao.listarObjetosProximos(conn, relogio.getDataAtual());
         for (int i = 0; i < objetosProximos.size(); i++) {
             System.out.println(objetosProximos.get(i).toString());
         }

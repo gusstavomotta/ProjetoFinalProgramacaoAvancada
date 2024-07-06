@@ -16,7 +16,7 @@ import model.ObjetoVoador;
  */
 public class ObjetoVoadorDao {
 
-    public void inserirNoBanco(ObjetoVoador obj, Conexao conn) throws SQLException {
+    public void inserirObjetoVoadorNoBanco(ObjetoVoador obj, Conexao conn) throws SQLException {
 
         try {
             PreparedStatement st;
@@ -41,7 +41,7 @@ public class ObjetoVoadorDao {
         }
     }
 
-    public ArrayList<ObjetoVoador> listarComFiltro(Conexao conn, String atributo, String valor) throws SQLException {
+    public ArrayList<ObjetoVoador> listarObjetosPorAtributo(Conexao conn, String atributo, String valor) throws SQLException {
 
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
         String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " = ?;";
@@ -68,7 +68,7 @@ public class ObjetoVoadorDao {
         return listObj;
     }
 
-    public ArrayList<ObjetoVoador> ordenarPorAtributo(Conexao conn, String atributo) throws SQLException {
+    public ArrayList<ObjetoVoador> ordernarObjetosPorAtributo(Conexao conn, String atributo) throws SQLException {
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
         String sql = "SELECT * FROM objeto_voador ORDER BY " + atributo + ";";
 
