@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class ObjetoVoador {
 
-    private final String id;    
+    private final String id;
     private final String data;
     private final String nome;
     private final String diametroMinKm;

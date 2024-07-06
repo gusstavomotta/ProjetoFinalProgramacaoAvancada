@@ -2,14 +2,12 @@ package br.com.unisc.trabpa;
 
 import br.com.unisc.trabpa.adapter.ObjetoVoadorAdapter;
 import com.fasterxml.jackson.databind.JsonNode;
-import br.com.unisc.trabpa.dal.Conexao;
-import br.com.unisc.trabpa.dal.NASAConnector;
+import br.com.unisc.trabpa.dal.Requisicao;
 import br.com.unisc.trabpa.model.DadosGrafico;
 import br.com.unisc.trabpa.model.Grafico;
 import br.com.unisc.trabpa.dal.ObjetoVoadorDao;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -23,18 +21,13 @@ public class app {
 
         String dataInicio = "2024-07-01";
         String dataFim = "2024-07-08";
-        Iterator<Map.Entry<String, JsonNode>> dadosRequisicao = NASAConnector.Request(dataInicio, dataFim);
+        Iterator<Map.Entry<String, JsonNode>> dadosRequisicao = Requisicao.Request(dataInicio, dataFim);
         ArrayList<ObjetoVoador> dadosTratados = ObjetoVoadorAdapter.IteratorToObjetoVoadorList(dadosRequisicao);
         ObjetoVoadorDao dao = new ObjetoVoadorDao();
         for (ObjetoVoador objetoVoador : dadosTratados) {
             dao.inserirObjetoVoadorNoBanco(objetoVoador);
         }
-        /* ARMAZENAR DADOS DA NASA */
-        
-        
-        
-        
-        
+
         Relogio relogio = new Relogio();
         Grafico graf = new Grafico();
         //Requisicao req = new Requisicao();

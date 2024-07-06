@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import br.com.unisc.trabpa.model.ObjetoVoador;
 import javax.management.BadAttributeValueExpException;
 
-public class ObjetoVoadorDao { 
-    
+public class ObjetoVoadorDao {
+
     public void inserirObjetoVoadorNoBanco(ObjetoVoador obj) throws SQLException {
 
         try {
-            
+
             PreparedStatement st;
             String query = "INSERT INTO objeto_voador (id,data,nome,diametroMinKm,diametroMaxKm,risco,dataDeAproximacao,velocidadeAproxKm) VALUES (?,?,?,?,?,?,?,?);";
 
@@ -37,10 +37,10 @@ public class ObjetoVoadorDao {
 
     public ArrayList<ObjetoVoador> listarObjetosPorAtributo(String atributo, String valor) throws SQLException, BadAttributeValueExpException {
 
-        if(!atributo.matches("^(\\D{1,})")){
+        if (!atributo.matches("^(\\D{1,})")) {
             throw new BadAttributeValueExpException("Not Today");
         }
-        
+
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
         String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " = ?;";
         PreparedStatement st = Conexao.getInstance().prepareStatement(sql);
@@ -66,8 +66,12 @@ public class ObjetoVoadorDao {
         return listObj;
     }
 
-    public ArrayList<ObjetoVoador> ordernarObjetosPorAtributo(String atributo) throws SQLException {
+    public ArrayList<ObjetoVoador> ordernarObjetosPorAtributo(String atributo) throws SQLException, BadAttributeValueExpException {
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
+
+        if (!atributo.matches("^(\\D{1,})")) {
+            throw new BadAttributeValueExpException("Not Today");
+        }
         String sql = "SELECT * FROM objeto_voador ORDER BY " + atributo + ";";
 
         PreparedStatement st = Conexao.getInstance().prepareStatement(sql);

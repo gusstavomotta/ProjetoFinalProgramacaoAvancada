@@ -10,13 +10,9 @@ import java.net.http.HttpResponse;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- *
- * @author caiok
- */
-public class NASAConnector {
-    
-    public static Iterator<Map.Entry<String, JsonNode>> Request(String dataInicio, String dataFim) throws IOException, InterruptedException {    
+public class Requisicao {
+
+    public static Iterator<Map.Entry<String, JsonNode>> Request(String dataInicio, String dataFim) throws IOException, InterruptedException {
         String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + dataInicio + "end_date=" + dataFim + "&api_key=MAnTYyY6fOQEl5cOoVJjJY1dhJQDrXxqWb20K7Jj";
 
         HttpClient client = HttpClient.newHttpClient();
@@ -28,7 +24,7 @@ public class NASAConnector {
         JsonNode objetosProximos = raiz.get("near_earth_objects");
 
         Iterator<Map.Entry<String, JsonNode>> dadosApi = objetosProximos.fields();
-        
+
         return dadosApi;
     }
 }

@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.unisc.trabpa.model;
 
 import br.com.unisc.trabpa.dal.Conexao;
-import br.com.unisc.trabpa.model.DadosGrafico;
 import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -14,29 +9,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
-import java.text.SimpleDateFormat;
-import br.com.unisc.trabpa.model.ObjetoVoador;
 import java.awt.Color;
 import org.jfree.chart.*;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
-import org.jfree.chart.axis.DateAxis;
-import org.jfree.chart.axis.DateTickUnit;
-import org.jfree.chart.axis.DateTickUnitType;
+
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-/**
- *
- * @author caiok
- */
 public class Grafico {
 
     public static void geraGrafico(ArrayList<LocalDate> dias, ArrayList<ArrayList<ObjetoVoador>> matriz) {
@@ -63,11 +46,11 @@ public class Grafico {
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         CategoryAxis axis = plot.getDomainAxis();
         axis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
-        
+
         // Customizar o eixo Y para pular de 2 em 2 unidades
         NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
         yAxis.setTickUnit(new NumberTickUnit(2));
-        
+
         // Customiza a área ocupada do gráfico de azul
         LineAndShapeRenderer renderer = new LineAndShapeRenderer();
         renderer.setSeriesPaint(0, Color.BLUE);
