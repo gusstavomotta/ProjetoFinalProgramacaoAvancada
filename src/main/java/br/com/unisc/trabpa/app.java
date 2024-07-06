@@ -40,7 +40,7 @@ public class app {
         //Requisicao req = new Requisicao();
 
         ArrayList<ArrayList<ObjetoVoador>> matriz = new ArrayList<>();
-        String dataInicial = "2024-07-06"; // Substitua pela data inicial desejada
+        String dataInicial = "2024-07-05"; // Substitua pela data inicial desejada
 
         // Gera os dados e obtém as datas e a matriz de dados
         DadosGrafico dadosGrafico = graf.geraDados(matriz, dataInicial);

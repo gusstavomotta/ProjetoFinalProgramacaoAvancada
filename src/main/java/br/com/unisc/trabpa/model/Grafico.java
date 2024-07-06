@@ -25,6 +25,8 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.DateTickUnit;
 import org.jfree.chart.axis.DateTickUnitType;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -59,9 +61,13 @@ public class Grafico {
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         CategoryAxis axis = plot.getDomainAxis();
         axis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
+        
+        // Customizar o eixo Y para pular de 2 em 2 unidades
+        NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
+        yAxis.setTickUnit(new NumberTickUnit(2));
 
         try {
-            ChartUtilities.saveChartAsJPEG(new File("C:\\Users\\caiok\\OneDrive\\Documentos\\GitHub\\TrabPa1\\src\\main\\java\\view\\grafObjVoador.jpg"), chart, 1080, 720);
+            ChartUtilities.saveChartAsJPEG(new File("C:\\Users\\caiok\\OneDrive\\Documentos\\GitHub\\TrabPa1\\src\\main\\java\\view\\grafObjVoador.jpg"), chart, 500, 300);
         } catch (IOException exc) {
             System.err.println("Erro ao gerar a imagem");
         }
