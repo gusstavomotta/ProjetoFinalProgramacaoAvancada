@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.text.SimpleDateFormat;
 import br.com.unisc.trabpa.model.ObjetoVoador;
+import java.awt.Color;
 import org.jfree.chart.*;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
@@ -29,6 +30,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
@@ -65,6 +67,13 @@ public class Grafico {
         // Customizar o eixo Y para pular de 2 em 2 unidades
         NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
         yAxis.setTickUnit(new NumberTickUnit(2));
+        
+        // Customiza a área ocupada do gráfico de azul
+        LineAndShapeRenderer renderer = new LineAndShapeRenderer();
+        renderer.setSeriesPaint(0, Color.BLUE);
+        renderer.setSeriesFillPaint(0, new Color(0, 0, 255, 50)); // Azul com transparência
+        renderer.setUseFillPaint(true);
+        plot.setRenderer(renderer);
 
         try {
             ChartUtilities.saveChartAsJPEG(new File("C:\\Users\\caiok\\OneDrive\\Documentos\\GitHub\\TrabPa1\\src\\main\\java\\view\\grafObjVoador.jpg"), chart, 500, 300);
@@ -100,11 +109,11 @@ public class Grafico {
 
     public DadosGrafico geraDados(ArrayList<ArrayList<ObjetoVoador>> matriz, String d) throws SQLException {
         DateTimeFormatter parser = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate data = LocalDate.parse(d, parser).minusDays(3);
+        LocalDate data = LocalDate.parse(d, parser).minusDays(5);
         ArrayList<LocalDate> dias = new ArrayList<>();
         Grafico g = new Grafico();
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 10; i++) {
             LocalDate currentDay = data.plusDays(i);
             dias.add(currentDay);
             matriz.add(g.dadosData(currentDay));
