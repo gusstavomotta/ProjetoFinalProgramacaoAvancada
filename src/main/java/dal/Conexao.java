@@ -2,7 +2,6 @@ package dal;
 
 import java.sql.*;
 
-
 public class Conexao {
 
     private final String driver = "com.mysql.cj.jdbc.Driver";
@@ -14,7 +13,7 @@ public class Conexao {
     public Conexao() throws ClassNotFoundException, SQLException {
         Class.forName(driver);
         conexao = DriverManager.getConnection(url, usuario, senha);
-        System.out.println("Banco conectado");                                                         
+        System.out.println("Banco conectado");
     }
 
     public Connection getConexao() {

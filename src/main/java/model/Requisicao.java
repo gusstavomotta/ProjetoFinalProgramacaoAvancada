@@ -1,4 +1,3 @@
-
 package model;
 
 import com.fasterxml.jackson.databind.JsonNode;

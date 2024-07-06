@@ -1,4 +1,3 @@
-
 package com.mycompany.trabpa;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -13,7 +12,6 @@ import model.ObjetoVoador;
 import model.Relogio;
 import model.Requisicao;
 
-
 public class TrabPa {
 
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
@@ -21,14 +19,13 @@ public class TrabPa {
         Relogio relogio = new Relogio();
         ObjetoVoadorDao dao = new ObjetoVoadorDao();
         Requisicao req = new Requisicao();
+        Conexao conn = new Conexao();
 
         String dataInicio = "2024-07-01";
         String dataFim = "2024-07-08";
 
         Iterator<Map.Entry<String, JsonNode>> dadosRequisicao = req.chamaApi(dataInicio, dataFim);
 
-        Conexao conn = new Conexao();
-        int contador = 0;
         while (dadosRequisicao.hasNext()) {
             Map.Entry<String, JsonNode> campo = dadosRequisicao.next();
             JsonNode listaDeObjetos = campo.getValue();
@@ -42,7 +39,6 @@ public class TrabPa {
                         proximidade.get("close_approach_date").asText(), proximidade.get("relative_velocity").get("kilometers_per_hour").asDouble());
 
                 dao.inserirObjetoVoadorNoBanco(objetoVoador, conn);
-                contador++;
             }
         }
 
@@ -51,17 +47,18 @@ public class TrabPa {
         for (int i = 0; i < objetosFiltrados.size(); i++) {
             System.out.println(objetosFiltrados.get(i).toString());
         }
+
         System.out.println("OBJETOS ORDENADOS POR ATRIBUTO");
         ArrayList<ObjetoVoador> objetosOrdenados = dao.ordernarObjetosPorAtributo(conn, "data");
         for (int i = 0; i < objetosOrdenados.size(); i++) {
             System.out.println(objetosOrdenados.get(i).toString());
         }
+
         System.out.println("OBJETOS PRÓXIMOS");
         ArrayList<ObjetoVoador> objetosProximos = dao.listarObjetosProximos(conn, relogio.getDataAtual());
         for (int i = 0; i < objetosProximos.size(); i++) {
             System.out.println(objetosProximos.get(i).toString());
         }
 
-        System.out.println(contador);
     }
 }
