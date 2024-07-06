@@ -2,10 +2,7 @@ package dal;
 
 import java.sql.*;
 
-/**
- *
- * @author ivansuptitz
- */
+
 public class Conexao {
 
     private final String driver = "com.mysql.cj.jdbc.Driver";

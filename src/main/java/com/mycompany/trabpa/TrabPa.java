@@ -1,6 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
+
 package com.mycompany.trabpa;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -15,10 +13,7 @@ import model.ObjetoVoador;
 import model.Relogio;
 import model.Requisicao;
 
-/**
- *
- * @author Gustavo Motta
- */
+
 public class TrabPa {
 
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, SQLException {

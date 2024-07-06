@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dal;
 
 import java.sql.PreparedStatement;
@@ -10,10 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.ObjetoVoador;
 
-/**
- *
- * @author Gustavo Motta
- */
+
 public class ObjetoVoadorDao {
 
     public void inserirObjetoVoadorNoBanco(ObjetoVoador obj, Conexao conn) throws SQLException {
