@@ -62,7 +62,6 @@ public class ObjetoVoadorDao {
                     listObj.add(obj);
 
                 }
-                // Fechando os recursos (opcional, mas recomendado)
 
             }
         }
@@ -72,7 +71,6 @@ public class ObjetoVoadorDao {
 
     public ArrayList<ObjetoVoador> ordenarPorAtributo(Conexao conn, String atributo) throws SQLException {
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
-        // Concatenar o atributo diretamente na string SQL
         String sql = "SELECT * FROM objeto_voador ORDER BY " + atributo + ";";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -91,9 +89,36 @@ public class ObjetoVoadorDao {
                     listObj.add(obj);
 
                 }
-                // Fechando os recursos (opcional, mas recomendado)
 
             }
+        }
+
+        return listObj;
+    }
+
+    public ArrayList<ObjetoVoador> listarObjetosProximos(Conexao conn, String data) throws SQLException {
+
+        ArrayList<ObjetoVoador> listObj = new ArrayList<>();
+        String query = "SELECT * FROM objeto_voador WHERE data >= ?";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, data);
+
+        try (ResultSet rs = st.executeQuery()) {
+            while (rs.next()) {
+                ObjetoVoador obj = new ObjetoVoador(
+                        rs.getString("id"),
+                        rs.getString("data"),
+                        rs.getString("nome"),
+                        rs.getString("diametroMinKm"),
+                        rs.getString("diametroMaxKm"),
+                        rs.getBoolean("risco"),
+                        rs.getString("dataDeAproximacao"),
+                        rs.getDouble("velocidadeAproxKm")
+                );
+                listObj.add(obj);
+
+            }
+
         }
 
         return listObj;

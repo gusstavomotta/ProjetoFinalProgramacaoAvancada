@@ -17,9 +17,18 @@ public class Relogio {
 
         LocalDateTime dataAtual = LocalDateTime.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String dataHoraFormatada = dataAtual.format(formato);
+
+        return dataHoraFormatada;
+
+    }
+
+    public String getDataAtual() {
+
+        LocalDateTime dataAtual = LocalDateTime.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dataFormatada = dataAtual.format(formato);
 
         return dataFormatada;
-
     }
 }

@@ -2,4 +2,5 @@ model\Requisicao.class
 model\Relogio.class
 com\mycompany\trabpa\TrabPa.class
 dal\Conexao.class
+dal\ObjetoVoadorDao.class
 model\ObjetoVoador.class

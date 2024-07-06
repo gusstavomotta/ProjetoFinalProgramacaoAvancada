@@ -22,16 +22,18 @@ import model.Requisicao;
 public class TrabPa {
 
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
-
+        
         Relogio data = new Relogio();
-        ObjetoVoadorDao dao = new ObjetoVoadorDao();
         System.out.println(data.getDataHoraAtual());
+        System.out.println(data.getDataAtual());
+        
+        ObjetoVoadorDao dao = new ObjetoVoadorDao();
 
         Requisicao req = new Requisicao();
         Iterator<Map.Entry<String, JsonNode>> campos = req.Requisicao();
 
         Conexao conn = new Conexao();
-        int contador = 0;
+//        int contador = 0;
 //        while (campos.hasNext()) {
 //            Map.Entry<String, JsonNode> campo = campos.next();
 //            JsonNode arrayDeAsteroides = campo.getValue();
@@ -48,18 +50,22 @@ public class TrabPa {
 //                contador++;
 //            }
 //        }
-       
-        
-        ArrayList<ObjetoVoador> lst = dao.listarComFiltro(conn, "risco", "1");
-        for (int i = 0; i < lst.size(); i++) {
-            System.out.println(lst.get(i).toString());
-        }
-
-//        ArrayList<ObjetoVoador> ordenada = dao.ordenarPorAtributo(conn, "data");
-//        for (int i = 0; i < ordenada.size(); i++) {
-//            System.out.println(ordenada.get(i).toString());
+//
+//        ArrayList<ObjetoVoador> objetosFiltrados = dao.listarComFiltro(conn, "risco", "1");
+//        for (int i = 0; i < objetosFiltrados.size(); i++) {
+//            System.out.println(objetosFiltrados.get(i).toString());
 //        }
-//        
-//         System.out.println(contador);
+//
+//        ArrayList<ObjetoVoador> objetosOrdenados = dao.ordenarPorAtributo(conn, "data");
+//        for (int i = 0; i < objetosOrdenados.size(); i++) {
+//            System.out.println(objetosOrdenados.get(i).toString());
+//        }
+        
+//        ArrayList<ObjetoVoador> objetosProximos = dao.listarObjetosProximos(conn, data.getDataAtual());
+//        for (int i = 0; i < objetosProximos.size(); i++) {
+//            System.out.println(objetosProximos.get(i).toString());
+//        }
+
+//        System.out.println(contador);
     }
 }
