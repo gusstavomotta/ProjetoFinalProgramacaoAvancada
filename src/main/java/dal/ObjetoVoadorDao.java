@@ -43,10 +43,9 @@ public class ObjetoVoadorDao {
     public ArrayList<ObjetoVoador> listarComFiltro(Conexao conn, String atributo, String valor) throws SQLException {
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
         // Concatenar o atributo diretamente na string SQL
-        String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " LIKE " + valor;
+        String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " = " + valor;
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            System.out.println(sql);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     ObjetoVoador obj = new ObjetoVoador(
@@ -60,11 +59,13 @@ public class ObjetoVoadorDao {
                             rs.getDouble("velocidadeAproxKm")
                     );
                     listObj.add(obj);
-                    System.out.println(obj.toString());
+                    
                 }
                 // Fechando os recursos (opcional, mas recomendado)
+
             }
         }
+        
 
         return listObj;
     }

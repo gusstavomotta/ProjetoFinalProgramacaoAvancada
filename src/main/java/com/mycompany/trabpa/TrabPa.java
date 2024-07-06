@@ -8,6 +8,7 @@ import dal.Conexao;
 import dal.ObjetoVoadorDao;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import model.ObjetoVoador;
@@ -47,7 +48,10 @@ public class TrabPa {
                 dao.inserirNoBanco(objetoVoador, conn);
             }
         }
-        System.out.println(dao.listarComFiltro(conn, "risco", "1"));
         
+        ArrayList<ObjetoVoador> lst = dao.listarComFiltro(conn, "risco", "1");
+        for (int i = 0; i < lst.size(); i++) {
+            System.out.println(lst.get(i).toString());
+        }
     }
 }
