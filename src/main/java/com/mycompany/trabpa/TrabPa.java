@@ -50,25 +50,11 @@ public class TrabPa {
 //                contador++;
 //            }
 //        }
-<<<<<<< Updated upstream
-//
+
 //        ArrayList<ObjetoVoador> objetosFiltrados = dao.listarComFiltro(conn, "risco", "1");
 //        for (int i = 0; i < objetosFiltrados.size(); i++) {
 //            System.out.println(objetosFiltrados.get(i).toString());
-=======
-       
-        
-        ArrayList<ObjetoVoador> lst = dao.listarComFiltro(conn, "risco", "1");
-        for (int i = 0; i < lst.size(); i++) {
-            System.out.println(lst.get(i).toString());
-        }
-        System.out.println(lst.toString());
 
-//        ArrayList<ObjetoVoador> ordenada = dao.ordenarPorAtributo(conn, "data");
-//        for (int i = 0; i < ordenada.size(); i++) {
-//            System.out.println(ordenada.get(i).toString());
->>>>>>> Stashed changes
-//        }
 //
 //        ArrayList<ObjetoVoador> objetosOrdenados = dao.ordenarPorAtributo(conn, "data");
 //        for (int i = 0; i < objetosOrdenados.size(); i++) {
