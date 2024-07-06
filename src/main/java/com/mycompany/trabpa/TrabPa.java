@@ -22,36 +22,44 @@ import model.Requisicao;
 public class TrabPa {
 
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
-        
+
         Relogio data = new Relogio();
-         ObjetoVoadorDao dao = new ObjetoVoadorDao();
+        ObjetoVoadorDao dao = new ObjetoVoadorDao();
         System.out.println(data.getDataHoraAtual());
 
         Requisicao req = new Requisicao();
         Iterator<Map.Entry<String, JsonNode>> campos = req.Requisicao();
 
         Conexao conn = new Conexao();
-
-        while (campos.hasNext()) {
-            Map.Entry<String, JsonNode> campo = campos.next();
-            JsonNode arrayDeAsteroides = campo.getValue();
-
-            for (JsonNode asteroide : arrayDeAsteroides) {
-                JsonNode proximidade = asteroide.get("close_approach_data").get(0);
-                
-                ObjetoVoador objetoVoador = new ObjetoVoador(asteroide.get("id").asText(),campo.getKey(), asteroide.get("name").asText(),
-                        asteroide.get("estimated_diameter").get("kilometers").get("estimated_diameter_min").asText(),
-                        asteroide.get("estimated_diameter").get("kilometers").get("estimated_diameter_max").asText(), asteroide.get("is_potentially_hazardous_asteroid").asBoolean(),
-                        proximidade.get("close_approach_date").asText(), proximidade.get("relative_velocity").get("kilometers_per_hour").asDouble());
-                
-               
-                dao.inserirNoBanco(objetoVoador, conn);
-            }
-        }
+        int contador = 0;
+//        while (campos.hasNext()) {
+//            Map.Entry<String, JsonNode> campo = campos.next();
+//            JsonNode arrayDeAsteroides = campo.getValue();
+//
+//            for (JsonNode asteroide : arrayDeAsteroides) {
+//                JsonNode proximidade = asteroide.get("close_approach_data").get(0);
+//
+//                ObjetoVoador objetoVoador = new ObjetoVoador(asteroide.get("id").asText(), campo.getKey(), asteroide.get("name").asText(),
+//                        asteroide.get("estimated_diameter").get("kilometers").get("estimated_diameter_min").asText(),
+//                        asteroide.get("estimated_diameter").get("kilometers").get("estimated_diameter_max").asText(), asteroide.get("is_potentially_hazardous_asteroid").asBoolean(),
+//                        proximidade.get("close_approach_date").asText(), proximidade.get("relative_velocity").get("kilometers_per_hour").asDouble());
+//
+//                dao.inserirNoBanco(objetoVoador, conn);
+//                contador++;
+//            }
+//        }
+       
         
         ArrayList<ObjetoVoador> lst = dao.listarComFiltro(conn, "risco", "1");
         for (int i = 0; i < lst.size(); i++) {
             System.out.println(lst.get(i).toString());
         }
+
+//        ArrayList<ObjetoVoador> ordenada = dao.ordenarPorAtributo(conn, "data");
+//        for (int i = 0; i < ordenada.size(); i++) {
+//            System.out.println(ordenada.get(i).toString());
+//        }
+//        
+//         System.out.println(contador);
     }
 }

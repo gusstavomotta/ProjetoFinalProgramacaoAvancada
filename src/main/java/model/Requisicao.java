@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public class Requisicao {
 
-    private String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2024-06-27&end_date=2024-07-01&api_key=MAnTYyY6fOQEl5cOoVJjJY1dhJQDrXxqWb20K7Jj";
+    private String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2024-07-01&end_date=2024-07-08&api_key=MAnTYyY6fOQEl5cOoVJjJY1dhJQDrXxqWb20K7Jj";
 
     public Iterator<Map.Entry<String, JsonNode>> Requisicao() throws IOException, InterruptedException {
 
@@ -31,9 +31,10 @@ public class Requisicao {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode raiz = mapper.readTree(resposta.body());
         JsonNode objetosProximos = raiz.get("near_earth_objects");
+        
 
         Iterator<Map.Entry<String, JsonNode>> campos = objetosProximos.fields();
-
+        
         return campos;
 
     }

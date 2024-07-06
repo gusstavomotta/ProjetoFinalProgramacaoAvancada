@@ -18,31 +18,32 @@ public class ObjetoVoadorDao {
 
     public void inserirNoBanco(ObjetoVoador obj, Conexao conn) throws SQLException {
 
-        PreparedStatement st;
-        String query = "INSERT INTO objeto_voador (id,data,nome,diametroMinKm,diametroMaxKm,risco,dataDeAproximacao,velocidadeAproxKm) VALUES (?,?,?,?,?,?,?,?);";
+        try {
+            PreparedStatement st;
+            String query = "INSERT INTO objeto_voador (id,data,nome,diametroMinKm,diametroMaxKm,risco,dataDeAproximacao,velocidadeAproxKm) VALUES (?,?,?,?,?,?,?,?);";
 
-        st = conn.prepareStatement(query);
+            st = conn.prepareStatement(query);
 
-        st.setString(1, obj.getId());
-        st.setString(2, obj.getData());
-        st.setString(3, obj.getNome());
-        st.setString(4, obj.getDiametroMinKm());
-        st.setString(5, obj.getDiametroMaxKm());
-        st.setBoolean(6, obj.getRisco());
-        st.setString(7, obj.getDataDeAproximacao());
-        st.setDouble(8, obj.getVelocidadeAproxKm());
+            st.setString(1, obj.getId());
+            st.setString(2, obj.getData());
+            st.setString(3, obj.getNome());
+            st.setString(4, obj.getDiametroMinKm());
+            st.setString(5, obj.getDiametroMaxKm());
+            st.setBoolean(6, obj.getRisco());
+            st.setString(7, obj.getDataDeAproximacao());
+            st.setDouble(8, obj.getVelocidadeAproxKm());
 
-        st.executeUpdate();
-        st.close();
-    }
+            st.executeUpdate();
+            st.close();
 
-    public void removerDoBanco() {
-
+        } catch (Exception e) {
+            System.out.println("Chave duplicada");
+        }
     }
 
     public ArrayList<ObjetoVoador> listarComFiltro(Conexao conn, String atributo, String valor) throws SQLException {
+
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
-        // Concatenar o atributo diretamente na string SQL
         String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " = " + valor;
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -59,13 +60,41 @@ public class ObjetoVoadorDao {
                             rs.getDouble("velocidadeAproxKm")
                     );
                     listObj.add(obj);
-                    
+
                 }
                 // Fechando os recursos (opcional, mas recomendado)
 
             }
         }
-        
+
+        return listObj;
+    }
+
+    public ArrayList<ObjetoVoador> ordenarPorAtributo(Conexao conn, String atributo) throws SQLException {
+        ArrayList<ObjetoVoador> listObj = new ArrayList<>();
+        // Concatenar o atributo diretamente na string SQL
+        String sql = "SELECT * FROM objeto_voador ORDER BY " + atributo + ";";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    ObjetoVoador obj = new ObjetoVoador(
+                            rs.getString("id"),
+                            rs.getString("data"),
+                            rs.getString("nome"),
+                            rs.getString("diametroMinKm"),
+                            rs.getString("diametroMaxKm"),
+                            rs.getBoolean("risco"),
+                            rs.getString("dataDeAproximacao"),
+                            rs.getDouble("velocidadeAproxKm")
+                    );
+                    listObj.add(obj);
+
+                }
+                // Fechando os recursos (opcional, mas recomendado)
+
+            }
+        }
 
         return listObj;
     }
