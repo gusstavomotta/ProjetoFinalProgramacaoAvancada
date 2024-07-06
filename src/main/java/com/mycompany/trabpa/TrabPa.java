@@ -2,6 +2,7 @@ package com.mycompany.trabpa;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import dal.Conexao;
+import dal.Grafico;
 import dal.ObjetoVoadorDao;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,9 +16,10 @@ import model.Requisicao;
 public class TrabPa {
 
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
-
+        
         Relogio relogio = new Relogio();
         ObjetoVoadorDao dao = new ObjetoVoadorDao();
+        Grafico graf = new Grafico();
         Requisicao req = new Requisicao();
         Conexao conn = new Conexao();
 
@@ -41,24 +43,32 @@ public class TrabPa {
                 dao.inserirObjetoVoadorNoBanco(objetoVoador, conn);
             }
         }
-
-        System.out.println("OBJETOS FILTRADOS");
-        ArrayList<ObjetoVoador> objetosFiltrados = dao.listarObjetosPorAtributo(conn, "risco", "1");
-        for (int i = 0; i < objetosFiltrados.size(); i++) {
-            System.out.println(objetosFiltrados.get(i).toString());
+        
+        String s = "2024-07-06";
+        ArrayList<ArrayList<ObjetoVoador>> list = new ArrayList<>();
+        try {
+            list = graf.geraDados(list, s, conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        System.out.println("OBJETOS ORDENADOS POR ATRIBUTO");
-        ArrayList<ObjetoVoador> objetosOrdenados = dao.ordernarObjetosPorAtributo(conn, "data");
-        for (int i = 0; i < objetosOrdenados.size(); i++) {
-            System.out.println(objetosOrdenados.get(i).toString());
-        }
-
-        System.out.println("OBJETOS PRÓXIMOS");
-        ArrayList<ObjetoVoador> objetosProximos = dao.listarObjetosProximos(conn, relogio.getDataAtual());
-        for (int i = 0; i < objetosProximos.size(); i++) {
-            System.out.println(objetosProximos.get(i).toString());
-        }
+        System.out.println(list);
+//        System.out.println("OBJETOS FILTRADOS");
+//        ArrayList<ObjetoVoador> objetosFiltrados = dao.listarObjetosPorAtributo(conn, "risco", "1");
+//        for (int i = 0; i < objetosFiltrados.size(); i++) {
+//            System.out.println(objetosFiltrados.get(i).toString());
+//        }
+//
+//        System.out.println("OBJETOS ORDENADOS POR ATRIBUTO");
+//        ArrayList<ObjetoVoador> objetosOrdenados = dao.ordernarObjetosPorAtributo(conn, "data");
+//        for (int i = 0; i < objetosOrdenados.size(); i++) {
+//            System.out.println(objetosOrdenados.get(i).toString());
+//        }
+//
+//        System.out.println("OBJETOS PRÓXIMOS");
+//        ArrayList<ObjetoVoador> objetosProximos = dao.listarObjetosProximos(conn, relogio.getDataAtual());
+//        for (int i = 0; i < objetosProximos.size(); i++) {
+//            System.out.println(objetosProximos.get(i).toString());
+//        }
 
     }
 }

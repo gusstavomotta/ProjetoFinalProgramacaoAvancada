@@ -62,14 +62,14 @@ public class ObjetoVoador {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ID: ").append(id);
+        sb.append("\nID: ").append(id);
         sb.append("\nData: ").append(data);
         sb.append("\nNome: ").append(nome);
         sb.append("\nDiâmetro mínimo em KM: ").append(diametroMinKm);
         sb.append("\nDiâmetro máximo em KM: ").append(diametroMaxKm);
         sb.append("\nRisco: ").append(risco);
         sb.append("\nData de aproximação: ").append(dataDeAproximacao);
-        sb.append("\nVelocidade de aproximação em KM/H: ").append(velocidadeAproxKm);
+        sb.append("\nVelocidade de aproximação em KM/H: \n").append(velocidadeAproxKm);
         return sb.toString();
     }
 
