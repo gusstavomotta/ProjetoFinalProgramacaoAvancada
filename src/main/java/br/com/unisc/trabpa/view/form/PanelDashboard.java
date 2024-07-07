@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.unisc.trabpa.view.form;
 
 import br.com.unisc.trabpa.dal.ObjetoVoadorDao;
@@ -19,10 +14,6 @@ import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Matheus
- */
 public class PanelDashboard extends javax.swing.JPanel {
 
     private JLabel lblDataHora;
@@ -30,9 +21,9 @@ public class PanelDashboard extends javax.swing.JPanel {
 
     public PanelDashboard() {
         initComponents();
-        panelBody = new javax.swing.JPanel(); // Inicialize o panelBody
-        setLayout(new BorderLayout()); // Defina o layout do PanelDashboard
-        add(panelBody, BorderLayout.CENTER); // Adicione o panelBody ao layout principal
+        panelBody = new javax.swing.JPanel();
+        setLayout(new BorderLayout());
+        add(panelBody, BorderLayout.CENTER);
         adicionaWidgets();
     }
 
@@ -47,12 +38,12 @@ public class PanelDashboard extends javax.swing.JPanel {
         lblDataHora.setFont(new Font("SansSerif", Font.BOLD, 24));
         lblDataHora.setHorizontalAlignment(JLabel.CENTER);
 
-        panelBody.setLayout(new BorderLayout());  //
-        panelBody.add(lblDataHora, BorderLayout.NORTH);  // Adiciona a data e hora no panelBody
+        panelBody.setLayout(new BorderLayout());
+        panelBody.add(lblDataHora, BorderLayout.NORTH);
 
         Relogio relogio = new Relogio();
 
-        int delay = 1000; // Atualiza a cada segundo
+        int delay = 1000;
         new Timer(delay, (e) -> {
             lblDataHora.setText(relogio.getDataHoraAtual());
         }).start();
@@ -64,7 +55,7 @@ public class PanelDashboard extends javax.swing.JPanel {
 
             ArrayList<ObjetoVoador> objetosProximos = objetoVoadorDao.listarObjetosProximos(new Relogio().getDataAtual());
 
-            System.out.println("Objetos detectados: " + objetosProximos.size()); // Log para depuração
+            System.out.println("Objetos detectados: " + objetosProximos.size());
 
             JLabel lblCount = new JLabel("Objetos Próximos: " + objetosProximos.size());
             lblCount.setFont(new Font("SansSerif", Font.BOLD, 18));
@@ -72,7 +63,7 @@ public class PanelDashboard extends javax.swing.JPanel {
 
             panelBody.add(lblCount, BorderLayout.SOUTH);
             panelBody.revalidate();
-            panelBody.repaint();  // Garantir atualização visual
+            panelBody.repaint();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao buscar contagem de objetos: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -87,9 +78,10 @@ public class PanelDashboard extends javax.swing.JPanel {
             for (ObjetoVoador obj : proximasAproximacoes) {
                 model.addRow(new Object[]{obj.getNome(), obj.getDataDeAproximacao(), obj.getDiametroMinKm(), obj.getRisco() ? "Sim" : "Não"});
             }
+
             JTable table = new JTable(model);
             JScrollPane scrollPane = new JScrollPane(table);
-            panelBody.add(scrollPane, BorderLayout.CENTER);  // Mudança aqui
+            panelBody.add(scrollPane, BorderLayout.CENTER);
             panelBody.revalidate();
             panelBody.repaint();
         } catch (SQLException ex) {

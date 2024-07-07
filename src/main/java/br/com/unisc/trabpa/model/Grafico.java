@@ -59,7 +59,7 @@ public class Grafico {
         plot.setRenderer(renderer);
 
         try {
-            ChartUtilities.saveChartAsJPEG(new File("C:\\Users\\caiok\\OneDrive\\Documentos\\GitHub\\TrabPa1\\src\\main\\java\\view\\grafObjVoador.jpg"), chart, 500, 300);
+            ChartUtilities.saveChartAsJPEG(new File("src\\main\\java\\view\\grafObjVoador.jpg"), chart, 500, 300);
         } catch (IOException exc) {
             System.err.println("Erro ao gerar a imagem");
         }

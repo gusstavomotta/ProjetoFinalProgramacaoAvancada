@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package br.com.unisc.trabpa.view.form;
 
 import br.com.unisc.trabpa.adapter.ObjetoVoadorAdapter;
@@ -12,12 +8,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.SwingWorker;
-
 
 public class PanelAtualizaDados extends javax.swing.JPanel {
 
@@ -94,16 +86,15 @@ public class PanelAtualizaDados extends javax.swing.JPanel {
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         String dataInicio = txtDataInicio.getText();
         String dataFim = txtDataFim.getText();
-        
+
         System.out.println("CLICOU NO BOTAO ");
         System.out.println(dataInicio);
         System.out.println(dataFim);
 
-        // Validação das datas
-//        if (!dataInicio.matches("\\d{4}-\\d{2}-\\d{2}") || !dataFim.matches("\\d{4}-\\d{2}-\\d{2}")) {
-//            JOptionPane.showMessageDialog(this, "Por favor, insira as datas no formato yyyy-MM-dd. Exemplo: 2024-07-05", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
+        if (!dataInicio.matches("\\d{4}-\\d{2}-\\d{2}") || !dataFim.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira as datas no formato yyyy-MM-dd. Exemplo: 2024-07-05", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         lblStatus.setText("Atualizando...");
         btnAtualizar.setEnabled(false);
 
