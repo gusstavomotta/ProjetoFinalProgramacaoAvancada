@@ -99,7 +99,7 @@ public class ObjetoVoadorDao {
 
         System.out.println(data);
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
-        String query = "SELECT * FROM objeto_voador WHERE data >= ?";
+        String query = "SELECT * FROM objeto_voador WHERE data >= ? order by data";
         PreparedStatement st = Conexao.getInstance().prepareStatement(query);
         st.setString(1, data);
 

@@ -10,7 +10,7 @@ public class Conexao {
     private final String driver = "com.mysql.cj.jdbc.Driver";
     private final String url = "jdbc:mysql://localhost/" + "trabalhopa";
     private final String usuario = "root";
-    private final String senha = "admin";
+    private final String senha = "root";
 
     private Conexao() {
     }
