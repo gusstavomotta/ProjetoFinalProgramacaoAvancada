@@ -149,33 +149,4 @@ public class ObjetoVoadorDao {
 
         return listObj;
     }
-
-    public ArrayList<ObjetoVoador> listarPorDistancia(String dist) throws SQLException {
-
-        System.out.println(dist);
-        ArrayList<ObjetoVoador> listObj = new ArrayList<>();
-        String query = "SELECT * FROM objeto_voador WHERE distancia <= ?";
-        PreparedStatement st = Conexao.getInstance().prepareStatement(query);
-        st.setString(1, dist);
-
-        try (ResultSet rs = st.executeQuery()) {
-            while (rs.next()) {
-                ObjetoVoador obj = new ObjetoVoador(
-                        rs.getString("id"),
-                        rs.getString("data"),
-                        rs.getString("nome"),
-                        rs.getString("diametroMinKm"),
-                        rs.getString("diametroMaxKm"),
-                        rs.getBoolean("risco"),
-                        rs.getString("dataDeAproximacao"),
-                        rs.getDouble("velocidadeAproxKm")
-                );
-                System.out.println(obj.toString());
-                listObj.add(obj);
-
-            }
-        }
-
-        return listObj;
-    }
 }
