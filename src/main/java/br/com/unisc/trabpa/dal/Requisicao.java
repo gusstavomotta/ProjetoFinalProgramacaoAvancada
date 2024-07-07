@@ -14,8 +14,14 @@ import java.util.Map;
 public class Requisicao {
 
     public static Iterator<Map.Entry<String, JsonNode>> Request(String dataInicio, String dataFim) throws IOException, InterruptedException {
-        String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + dataInicio + "end_date=" + dataFim + "&api_key=MAnTYyY6fOQEl5cOoVJjJY1dhJQDrXxqWb20K7Jj";
-
+        
+        System.out.println("CLASSE REQUISICAO");
+        System.out.println(dataInicio);
+        System.out.println(dataFim);
+        
+        String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + dataInicio + "&end_date=" + dataFim + "&api_key=MAnTYyY6fOQEl5cOoVJjJY1dhJQDrXxqWb20K7Jj";
+        System.out.println(url);
+        
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest requisicao = (HttpRequest) HttpRequest.newBuilder().uri(URI.create(url)).build();
         HttpResponse<String> retornoApi = client.send(requisicao, HttpResponse.BodyHandlers.ofString());
