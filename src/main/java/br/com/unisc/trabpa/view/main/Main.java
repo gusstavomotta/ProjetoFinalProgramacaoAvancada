@@ -8,8 +8,9 @@ package br.com.unisc.trabpa.view.main;
 import br.com.unisc.trabpa.dal.ObjetoVoadorDao;
 import br.com.unisc.trabpa.model.ObjetoVoador;
 import br.com.unisc.trabpa.model.Relogio;
-import br.com.unisc.trabpa.view.form.Panel1;
-import br.com.unisc.trabpa.view.form.pnlSobre;
+import br.com.unisc.trabpa.view.form.PanelDashboard;
+import br.com.unisc.trabpa.view.form.PanelAtualizaDados;
+import br.com.unisc.trabpa.view.form.PanelSobre;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -18,8 +19,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import br.com.unisc.trabpa.view.menu.MenuItem;
-import java.awt.Dimension;
-import java.net.URL;
 import java.sql.SQLException;
 import javax.swing.Timer;
 import javax.swing.JLabel;
@@ -27,6 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -35,7 +36,6 @@ import javax.swing.table.DefaultTableModel;
 public class Main extends javax.swing.JFrame {
 
     private JLabel lblDataHora;
-
 
     /**
      * Creates new form Main
@@ -64,7 +64,8 @@ public class Main extends javax.swing.JFrame {
         MenuItem menuDashboard = new MenuItem(iconArrow, "Dashboard", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new Panel1());
+                panelBody.removeAll();
+                panelBody.add(new PanelDashboard());
                 panelBody.repaint();
                 panelBody.revalidate();
             }
@@ -77,7 +78,15 @@ public class Main extends javax.swing.JFrame {
         });
 
         //  CRIA SUBMENU DADOS
-        MenuItem manuDados = new MenuItem(iconArrow, "Atualizar dados", null);
+        MenuItem manuDados = new MenuItem(iconArrow, "Atualizar dados", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                panelBody.removeAll();
+                panelBody.add(new PanelAtualizaDados());
+                panelBody.repaint();
+                panelBody.revalidate();
+            }
+        });
         MenuItem menuresultados = new MenuItem(iconArrow, "Resultados", null);
 
         //  CRIA SUBMENU CONFIGURAÇÕES 
@@ -87,7 +96,7 @@ public class Main extends javax.swing.JFrame {
         MenuItem menuSobre = new MenuItem(iconArrow, "Sobre", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                pnlSobre pnlSobre = new pnlSobre();
+                PanelSobre pnlSobre = new PanelSobre();
                 panelBody.removeAll();
                 panelBody.add(pnlSobre);
                 panelBody.repaint();
@@ -148,7 +157,7 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao buscar contagem de objetos: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void widgetProximasAproximacoes() {
         String[] columnNames = {"Nome", "Data de Aproximação", "Distância Mínima", "Risco"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
@@ -167,6 +176,7 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao acessar dados de aproximações: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -229,7 +239,6 @@ public class Main extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(871, 473));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
 
     /**
      * @param args the command line arguments
