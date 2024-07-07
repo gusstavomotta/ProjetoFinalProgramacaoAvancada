@@ -121,4 +121,30 @@ public class ObjetoVoadorDao {
 
         return listObj;
     }
+    
+    public ArrayList<ObjetoVoador> listarProxAproximacoes(String data) throws SQLException {
+
+        ArrayList<ObjetoVoador> listObj = new ArrayList<>();
+        String query = "SELECT * FROM objeto_voador WHERE data > ?";
+        PreparedStatement st = Conexao.getInstance().prepareStatement(query);
+        st.setString(1, data);
+
+        try (ResultSet rs = st.executeQuery()) {
+            while (rs.next()) {
+                ObjetoVoador obj = new ObjetoVoador(
+                        rs.getString("id"),
+                        rs.getString("data"),
+                        rs.getString("nome"),
+                        rs.getString("diametroMinKm"),
+                        rs.getString("diametroMaxKm"),
+                        rs.getBoolean("risco"),
+                        rs.getString("dataDeAproximacao"),
+                        rs.getDouble("velocidadeAproxKm")
+                );
+                listObj.add(obj);
+            }
+        }
+
+        return listObj;
+    }
 }
