@@ -97,6 +97,7 @@ public class ObjetoVoadorDao {
 
     public ArrayList<ObjetoVoador> listarObjetosProximos(String data) throws SQLException {
 
+        System.out.println(data);
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
         String query = "SELECT * FROM objeto_voador WHERE data >= ?";
         PreparedStatement st = Conexao.getInstance().prepareStatement(query);
@@ -114,6 +115,7 @@ public class ObjetoVoadorDao {
                         rs.getString("dataDeAproximacao"),
                         rs.getDouble("velocidadeAproxKm")
                 );
+                System.out.println(obj.toString());
                 listObj.add(obj);
 
             }
@@ -121,7 +123,7 @@ public class ObjetoVoadorDao {
 
         return listObj;
     }
-    
+
     public ArrayList<ObjetoVoador> listarProxAproximacoes(String data) throws SQLException {
 
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();

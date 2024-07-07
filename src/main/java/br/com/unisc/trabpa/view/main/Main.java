@@ -5,29 +5,15 @@
  */
 package br.com.unisc.trabpa.view.main;
 
-import br.com.unisc.trabpa.dal.ObjetoVoadorDao;
-import br.com.unisc.trabpa.model.ObjetoVoador;
-import br.com.unisc.trabpa.model.Relogio;
 import br.com.unisc.trabpa.view.form.PanelDashboard;
 import br.com.unisc.trabpa.view.form.PanelAtualizaDados;
 import br.com.unisc.trabpa.view.form.PanelSobre;
-import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import br.com.unisc.trabpa.view.menu.MenuItem;
-import java.sql.SQLException;
-import javax.swing.Timer;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -35,22 +21,11 @@ import java.nio.charset.StandardCharsets;
  */
 public class Main extends javax.swing.JFrame {
 
-    private JLabel lblDataHora;
-
-    /**
-     * Creates new form Main
-     */
     public Main() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        adicionaWidgets();
-        execute();
-    }
 
-    private void adicionaWidgets() {
-        widgetRelogio();
-        widgetContadorObjetos();
-        widgetProximasAproximacoes();
+        execute();
     }
 
     private void execute() {
@@ -121,60 +96,6 @@ public class Main extends javax.swing.JFrame {
             }
         }
         menus.revalidate();
-    }
-
-    private void widgetRelogio() {
-        lblDataHora = new JLabel();
-        lblDataHora.setFont(new Font("SansSerif", Font.BOLD, 24));
-        lblDataHora.setHorizontalAlignment(JLabel.CENTER);
-
-        panelBody.setLayout(new BorderLayout());  //
-        panelBody.add(lblDataHora, BorderLayout.NORTH);  // Adiciona a data e hora no panelBody
-
-        Relogio relogio = new Relogio();
-
-        int delay = 1000; // Atualiza a cada segundo
-        new Timer(delay, (e) -> {
-            lblDataHora.setText(relogio.getDataHoraAtual());
-        }).start();
-    }
-
-    private void widgetContadorObjetos() {
-        try {
-            ObjetoVoadorDao objetoVoadorDao = new ObjetoVoadorDao();
-            ArrayList<ObjetoVoador> objetosProximos = objetoVoadorDao.listarObjetosProximos(new Relogio().getDataAtual());
-
-            System.out.println("Objetos detectados: " + objetosProximos.size()); // Log para depuração
-
-            JLabel lblCount = new JLabel("Objetos Próximos: " + objetosProximos.size());
-            lblCount.setFont(new Font("SansSerif", Font.BOLD, 18));
-            lblCount.setHorizontalAlignment(JLabel.CENTER);
-
-            panelBody.add(lblCount, BorderLayout.SOUTH);
-            panelBody.revalidate();
-            panelBody.repaint();  // Garantir atualização visual
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao buscar contagem de objetos: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void widgetProximasAproximacoes() {
-        String[] columnNames = {"Nome", "Data de Aproximação", "Distância Mínima", "Risco"};
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        try {
-            ObjetoVoadorDao objetoVoadorDao = new ObjetoVoadorDao();
-            ArrayList<ObjetoVoador> proximasAproximacoes = objetoVoadorDao.listarObjetosProximos(new Relogio().getDataAtual());
-            for (ObjetoVoador obj : proximasAproximacoes) {
-                model.addRow(new Object[]{obj.getNome(), obj.getDataDeAproximacao(), obj.getDiametroMinKm(), obj.getRisco() ? "Sim" : "Não"});
-            }
-            JTable table = new JTable(model);
-            JScrollPane scrollPane = new JScrollPane(table);
-            panelBody.add(scrollPane, BorderLayout.CENTER);  // Mudança aqui
-            panelBody.revalidate();
-            panelBody.repaint();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao acessar dados de aproximações: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     /**
