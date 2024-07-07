@@ -1,7 +1,7 @@
 package br.com.unisc.trabpa.view.main;
 
-import br.com.unisc.trabpa.view.form.PanelDashboard;
 import br.com.unisc.trabpa.view.form.PanelAtualizaDados;
+import br.com.unisc.trabpa.view.form.PanelDashboard;
 import br.com.unisc.trabpa.view.form.PanelSobre;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
