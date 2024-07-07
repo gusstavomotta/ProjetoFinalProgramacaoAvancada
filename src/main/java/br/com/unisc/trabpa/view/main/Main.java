@@ -1,7 +1,8 @@
 package br.com.unisc.trabpa.view.main;
 
-import br.com.unisc.trabpa.view.form.PanelAtualizaDados;
 import br.com.unisc.trabpa.view.form.PanelDashboard;
+import br.com.unisc.trabpa.view.form.PanelAtualizaDados;
+import br.com.unisc.trabpa.view.form.PanelGrafico;
 import br.com.unisc.trabpa.view.form.PanelSobre;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,17 +12,14 @@ import javax.swing.JFrame;
 import br.com.unisc.trabpa.view.menu.MenuItem;
 
 public class Main extends javax.swing.JFrame {
-
     public Main() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
         execute();
     }
 
     private void execute() {
         ImageIcon iconDados = new ImageIcon(getClass().getResource("/dados.png"));
-        ImageIcon iconConfig = new ImageIcon(getClass().getResource("/configuraçao.png"));
         ImageIcon iconArquivo = new ImageIcon(getClass().getResource("/arquivo.png"));
         ImageIcon iconAjuda = new ImageIcon(getClass().getResource("/ajuda.png"));
         ImageIcon iconArrow = new ImageIcon(getClass().getResource("/arrow.png"));
@@ -53,7 +51,14 @@ public class Main extends javax.swing.JFrame {
         });
         MenuItem menuresultados = new MenuItem(iconArrow, "Resultados", null);
 
-        MenuItem menuPref = new MenuItem(iconArrow, "Preferências", null);
+        MenuItem menuGrafico = new MenuItem(iconArrow, "Gráfico", new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae){
+                panelBody.add(new PanelGrafico());
+                panelBody.repaint();
+                panelBody.revalidate();
+            }
+        });
 
         MenuItem menuSobre = new MenuItem(iconArrow, "Sobre", new ActionListener() {
             @Override
@@ -66,12 +71,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        MenuItem menuArquivo = new MenuItem(iconArquivo, "Arquivo", null, menuDashboard, menuSair);
+        MenuItem menuArquivo = new MenuItem(iconArquivo, "Arquivo", null, menuDashboard, menuGrafico, menuSair);
         MenuItem menuDados = new MenuItem(iconDados, "Dados", null, manuDados, menuresultados);
-        MenuItem menuConfig = new MenuItem(iconConfig, "Configurações", null, menuPref);
         MenuItem menuAjuda = new MenuItem(iconAjuda, "Ajuda", null, menuSobre);
 
-        addMenu(menuArquivo, menuDados, menuConfig, menuAjuda);
+        addMenu(menuArquivo, menuDados, menuAjuda);
     }
 
     private void addMenu(MenuItem... menu) {

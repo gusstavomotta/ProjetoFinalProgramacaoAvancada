@@ -5,9 +5,7 @@ import br.com.unisc.trabpa.dal.ObjetoVoadorDao;
 import br.com.unisc.trabpa.dal.Requisicao;
 import br.com.unisc.trabpa.model.ObjetoVoador;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.toedter.calendar.JDateChooser;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -16,10 +14,6 @@ import javax.swing.SwingWorker;
 public class PanelAtualizaDados extends javax.swing.JPanel {
 
     private ObjetoVoadorDao objetoVoadorDao;
-    private JDateChooser dateChooserInicio;
-    private JDateChooser dateChooserFim;
-    private javax.swing.JButton btnAtualizar;
-    private javax.swing.JLabel lblStatus;
 
     public PanelAtualizaDados() {
         initComponents();
@@ -27,17 +21,24 @@ public class PanelAtualizaDados extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dateChooserInicio = new JDateChooser();
-        dateChooserFim = new JDateChooser();
+        txtDataInicio = new javax.swing.JTextField();
+        txtDataFim = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
 
-        dateChooserInicio.setDateFormatString("yyyy-MM-dd");
-        dateChooserFim.setDateFormatString("yyyy-MM-dd");
+        txtDataInicio.setText("Formato: yyyy-MM-dd");
+        txtDataInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataInicioActionPerformed(evt);
+            }
+        });
 
-        btnAtualizar.setText("Atualizar Dados");
+        txtDataFim.setText("Formato: yyyy-MM-dd");
+
+        btnAtualizar.setText("Atualizar Dados:");
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualizarActionPerformed(evt);
@@ -55,8 +56,8 @@ public class PanelAtualizaDados extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(67, 67, 67)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dateChooserFim, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                            .addComponent(dateChooserInicio)
+                            .addComponent(txtDataFim, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                            .addComponent(txtDataInicio)
                             .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(338, 338, 338)
@@ -67,41 +68,41 @@ public class PanelAtualizaDados extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
-                .addComponent(dateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(dateChooserFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(lblStatus)
                 .addGap(113, 113, 113)
                 .addComponent(btnAtualizar)
                 .addContainerGap(162, Short.MAX_VALUE))
         );
-    }
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        Date dataInicio = dateChooserInicio.getDate();
-        Date dataFim = dateChooserFim.getDate();
+    private void txtDataInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataInicioActionPerformed
 
-        if (dataInicio == null || dataFim == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione ambas as datas.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        String dataInicio = txtDataInicio.getText();
+        String dataFim = txtDataFim.getText();
+
+        System.out.println("CLICOU NO BOTAO ");
+        System.out.println(dataInicio);
+        System.out.println(dataFim);
+
+        if (!dataInicio.matches("\\d{4}-\\d{2}-\\d{2}") || !dataFim.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira as datas no formato yyyy-MM-dd. Exemplo: 2024-07-05", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        if (!dataFim.after(dataInicio)) {
-            JOptionPane.showMessageDialog(this, "A data final deve ser maior que a data inicial.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         lblStatus.setText("Atualizando...");
         btnAtualizar.setEnabled(false);
 
         new SwingWorker<Void, Void>() {
             protected Void doInBackground() throws Exception {
                 try {
-                    String dataInicioStr = new java.text.SimpleDateFormat("yyyy-MM-dd").format(dataInicio);
-                    String dataFimStr = new java.text.SimpleDateFormat("yyyy-MM-dd").format(dataFim);
 
-                    Iterator<Map.Entry<String, JsonNode>> dados = Requisicao.Request(dataInicioStr, dataFimStr);
+                    Iterator<Map.Entry<String, JsonNode>> dados = Requisicao.Request(dataInicio, dataFim);
                     ArrayList<ObjetoVoador> objetos = ObjetoVoadorAdapter.IteratorToObjetoVoadorList(dados);
                     for (ObjetoVoador obj : objetos) {
                         objetoVoadorDao.inserirObjetoVoadorNoBanco(obj);
@@ -119,5 +120,13 @@ public class PanelAtualizaDados extends javax.swing.JPanel {
                 btnAtualizar.setEnabled(true);
             }
         }.execute();
-    }                                            
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JLabel lblStatus;
+    private javax.swing.JTextField txtDataFim;
+    private javax.swing.JTextField txtDataInicio;
+    // End of variables declaration//GEN-END:variables
 }
