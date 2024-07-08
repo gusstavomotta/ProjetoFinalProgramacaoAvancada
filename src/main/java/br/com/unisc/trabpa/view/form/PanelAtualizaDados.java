@@ -6,6 +6,7 @@ import br.com.unisc.trabpa.dal.Requisicao;
 import br.com.unisc.trabpa.model.ObjetoVoador;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -23,6 +24,7 @@ public class PanelAtualizaDados extends javax.swing.JPanel {
     private javax.swing.JLabel lblStatus;
 
     public PanelAtualizaDados() {
+        this.setBackground(Color.WHITE);
         initComponents();
         objetoVoadorDao = new ObjetoVoadorDao();
     }

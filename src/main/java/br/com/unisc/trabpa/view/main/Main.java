@@ -1,5 +1,6 @@
 package br.com.unisc.trabpa.view.main;
 
+import br.com.unisc.trabpa.model.Grafico;
 import br.com.unisc.trabpa.view.form.PanelDashboard;
 import br.com.unisc.trabpa.view.form.PanelAtualizaDados;
 import br.com.unisc.trabpa.view.form.PanelGrafico;
@@ -11,6 +12,10 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import br.com.unisc.trabpa.view.menu.MenuItem;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main extends javax.swing.JFrame {
     public Main() {

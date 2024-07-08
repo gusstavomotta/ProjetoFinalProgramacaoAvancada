@@ -6,14 +6,17 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.awt.Color;
-import org.jfree.chart.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
-
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.CategoryPlot;
@@ -22,14 +25,23 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 public class Grafico {
 
-    public static void geraGrafico(ArrayList<LocalDate> dias, ArrayList<ArrayList<ObjetoVoador>> matriz) {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    public static String geraGrafico(LocalDate dataInicio, LocalDate dataFim) throws SQLException {
+        ArrayList<LocalDate> dias = new ArrayList<>();
+        ArrayList<ArrayList<ObjetoVoador>> matriz = new ArrayList<>();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate currentDate = dataInicio;
+
+        while (!currentDate.isAfter(dataFim)) {
+            dias.add(currentDate);
+            matriz.add(dadosData(currentDate));
+            currentDate = currentDate.plusDays(1);
+        }
+
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < matriz.size(); i++) {
-            ArrayList<ObjetoVoador> numObj = matriz.get(i);
             String dia = dias.get(i).format(formatter);
-            dataset.addValue(numObj.size(), "Objetos Voadores", dia);
+            dataset.addValue(matriz.get(i).size(), "Objetos Voadores", dia);
         }
 
         JFreeChart chart = ChartFactory.createLineChart(
@@ -42,30 +54,33 @@ public class Grafico {
                 false,
                 false);
 
-        // Customizar eixo X para exibir datas
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         CategoryAxis axis = plot.getDomainAxis();
         axis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
 
-        // Customizar o eixo Y para pular de 2 em 2 unidades
         NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
         yAxis.setTickUnit(new NumberTickUnit(2));
 
-        // Customiza a área ocupada do gráfico de azul
         LineAndShapeRenderer renderer = new LineAndShapeRenderer();
         renderer.setSeriesPaint(0, Color.BLUE);
         renderer.setSeriesFillPaint(0, new Color(0, 0, 255, 50)); // Azul com transparência
         renderer.setUseFillPaint(true);
         plot.setRenderer(renderer);
 
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String filePath = "src/main/java/view/grafObjVoador_" + timestamp + ".jpg";
+
         try {
-            ChartUtilities.saveChartAsJPEG(new File("src\\main\\java\\view\\grafObjVoador.jpg"), chart, 500, 300);
+            File outputFile = new File(filePath);
+            outputFile.getParentFile().mkdirs(); // Cria diretórios se não existirem
+            ChartUtilities.saveChartAsJPEG(outputFile, chart, 1280, 680);
         } catch (IOException exc) {
-            System.err.println("Erro ao gerar a imagem");
+            System.err.println("Erro ao gerar a imagem: " + exc.getMessage());
         }
+        return filePath;
     }
 
-    public ArrayList<ObjetoVoador> dadosData(LocalDate data) throws SQLException {
+    public static ArrayList<ObjetoVoador> dadosData(LocalDate data) throws SQLException {
         ArrayList<ObjetoVoador> list = new ArrayList<>();
         String sql = "SELECT * FROM objeto_voador WHERE data = ?;";
         PreparedStatement st = Conexao.getInstance().prepareStatement(sql);
@@ -89,15 +104,5 @@ public class Grafico {
         }
 
         return list;
-    }
-
-    public DadosGrafico geraDados(ArrayList<ArrayList<ObjetoVoador>> matriz, String d) throws SQLException {
-        DateTimeFormatter parser = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate data = LocalDate.parse(d, parser).minusDays(5);
-        ArrayList<LocalDate> dias = new ArrayList<>();
-        Grafico g = new Grafico();
-
-
-        return new DadosGrafico(dias, matriz);
     }
 }

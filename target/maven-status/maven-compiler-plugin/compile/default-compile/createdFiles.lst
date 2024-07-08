@@ -13,6 +13,7 @@ br\com\unisc\trabpa\view\form\PanelResultados$3.class
 br\com\unisc\trabpa\view\main\Main$2.class
 br\com\unisc\trabpa\view\main\Main$4.class
 br\com\unisc\trabpa\view\form\PanelResultados.class
+br\com\unisc\trabpa\view\form\PanelGrafico$1.class
 br\com\unisc\trabpa\model\DadosGrafico.class
 br\com\unisc\trabpa\view\menu\MenuItem$2.class
 br\com\unisc\trabpa\dal\Conexao.class
