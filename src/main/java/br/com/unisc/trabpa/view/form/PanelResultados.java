@@ -51,18 +51,13 @@ public class PanelResultados extends javax.swing.JPanel {
     }
      
      private Comparator<ObjetoVoador> getComparator(String criterio) {
-        switch (criterio) {
-            case "Distância":
-                return Comparator.comparing(ObjetoVoador::getDistancia);
-            case "Tamanho do Objeto":
-                return Comparator.comparing(ObjetoVoador::getDiametroMaxKm, Comparator.reverseOrder()); 
-            case "Velocidade":
-                return Comparator.comparing(ObjetoVoador::getVelocidadeAproxKm).reversed();
-            case "Risco":
-                return Comparator.comparing(ObjetoVoador::getCategoriaRisco).reversed();  
-            default:
-                return Comparator.comparing(ObjetoVoador::getDistancia);
-        }
+        return switch (criterio) {
+            case "Distância" -> Comparator.comparing(ObjetoVoador::getDistancia);
+            case "Tamanho do objeto" -> Comparator.comparing(ObjetoVoador::getDiametroMaxKm, Comparator.reverseOrder());
+            case "Velocidade" -> Comparator.comparing(ObjetoVoador::getVelocidadeAproxKm).reversed();
+            case "Risco" -> Comparator.comparing(ObjetoVoador::getCategoriaRisco).reversed();
+            default -> Comparator.comparing(ObjetoVoador::getDistancia);
+        };
     }
      
      private void atualizarTabela(List<ObjetoVoador> dados) {
