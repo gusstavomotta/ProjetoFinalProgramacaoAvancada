@@ -13,10 +13,11 @@ public class ObjetoVoador {
     private final String diametroMaxKm;
     private final Boolean risco;
     private final String dataDeAproximacao;
+
     private final double velocidadeAproxKm;
+    private final String distancia;
 
-    public ObjetoVoador(String id, String data, String nome, String diametroMinKm, String diametroMaxKm, Boolean risco, String dataDeAproximacao, double velocidadeAproxKm) {
-
+    public ObjetoVoador(String id, String data, String nome, String diametroMinKm, String diametroMaxKm, Boolean risco, String dataDeAproximacao, double velocidadeAproxKm, String distancia) {
         this.id = id;
         this.data = data;
         this.nome = nome;
@@ -25,7 +26,10 @@ public class ObjetoVoador {
         this.risco = risco;
         this.dataDeAproximacao = dataDeAproximacao;
         this.velocidadeAproxKm = velocidadeAproxKm;
+        this.distancia = distancia;
     }
+
+
 
     public String getData() {
         return data;
@@ -59,6 +63,10 @@ public class ObjetoVoador {
         return velocidadeAproxKm;
     }
 
+    public String getDistancia() {
+        return distancia;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -69,7 +77,8 @@ public class ObjetoVoador {
         sb.append("\nDiâmetro máximo em KM: ").append(diametroMaxKm);
         sb.append("\nRisco: ").append(risco);
         sb.append("\nData de aproximação: ").append(dataDeAproximacao);
-        sb.append("\nVelocidade de aproximação em KM/H: \n").append(velocidadeAproxKm);
+        sb.append("\nVelocidade de aproximação em KM/H: ").append(velocidadeAproxKm);
+        sb.append("\nDistância da terra: ").append(distancia);
         return sb.toString();
     }
 

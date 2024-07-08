@@ -70,13 +70,13 @@ public class PanelDashboard extends javax.swing.JPanel {
     }
 
     private void widgetProximasAproximacoes() {
-        String[] columnNames = {"Nome", "Data de Aproximação", "Distância Mínima", "Risco"};
+        String[] columnNames = {"Nome", "Data de Aproximação", "Distância", "Risco"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         try {
             ObjetoVoadorDao objetoVoadorDao = new ObjetoVoadorDao();
             ArrayList<ObjetoVoador> proximasAproximacoes = objetoVoadorDao.listarObjetosProximos(new Relogio().getDataAtual());
             for (ObjetoVoador obj : proximasAproximacoes) {
-                model.addRow(new Object[]{obj.getNome(), obj.getDataDeAproximacao(), obj.getDiametroMinKm(), obj.getRisco() ? "Sim" : "Não"});
+                model.addRow(new Object[]{obj.getNome(), obj.getDataDeAproximacao(), obj.getDistancia(), obj.getRisco() ? "Sim" : "Não"});
             }
 
             JTable table = new JTable(model);

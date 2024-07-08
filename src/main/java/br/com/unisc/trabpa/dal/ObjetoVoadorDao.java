@@ -14,7 +14,7 @@ public class ObjetoVoadorDao {
         try {
 
             PreparedStatement st;
-            String query = "INSERT INTO objeto_voador (id,data,nome,diametroMinKm,diametroMaxKm,risco,dataDeAproximacao,velocidadeAproxKm) VALUES (?,?,?,?,?,?,?,?);";
+            String query = "INSERT INTO objeto_voador (id,data,nome,diametroMinKm,diametroMaxKm,risco,dataDeAproximacao,velocidadeAproxKm,distancia) VALUES (?,?,?,?,?,?,?,?,?);";
 
             st = Conexao.getInstance().prepareStatement(query);
 
@@ -26,6 +26,7 @@ public class ObjetoVoadorDao {
             st.setBoolean(6, obj.getRisco());
             st.setString(7, obj.getDataDeAproximacao());
             st.setDouble(8, obj.getVelocidadeAproxKm());
+            st.setString(9, obj.getDistancia());
 
             st.executeUpdate();
             st.close();
@@ -56,7 +57,8 @@ public class ObjetoVoadorDao {
                         rs.getString("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
-                        rs.getDouble("velocidadeAproxKm")
+                        rs.getDouble("velocidadeAproxKm"),
+                        rs.getString("distancia")
                 );
                 listObj.add(obj);
 
@@ -85,7 +87,8 @@ public class ObjetoVoadorDao {
                         rs.getString("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
-                        rs.getDouble("velocidadeAproxKm")
+                        rs.getDouble("velocidadeAproxKm"),
+                        rs.getString("distancia")
                 );
                 listObj.add(obj);
 
@@ -97,9 +100,8 @@ public class ObjetoVoadorDao {
 
     public ArrayList<ObjetoVoador> listarObjetosProximos(String data) throws SQLException {
 
-        System.out.println(data);
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
-        String query = "SELECT * FROM objeto_voador WHERE data >= ? order by data";
+        String query = "SELECT * FROM objeto_voador WHERE data >= ? order by data,distanciaMinKm, risco";
         PreparedStatement st = Conexao.getInstance().prepareStatement(query);
         st.setString(1, data);
 
@@ -113,9 +115,9 @@ public class ObjetoVoadorDao {
                         rs.getString("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
-                        rs.getDouble("velocidadeAproxKm")
+                        rs.getDouble("velocidadeAproxKm"),
+                        rs.getString("distancia")
                 );
-                System.out.println(obj.toString());
                 listObj.add(obj);
 
             }
@@ -141,7 +143,8 @@ public class ObjetoVoadorDao {
                         rs.getString("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
-                        rs.getDouble("velocidadeAproxKm")
+                        rs.getDouble("velocidadeAproxKm"),
+                        rs.getString("distancia")
                 );
                 listObj.add(obj);
             }
@@ -168,7 +171,8 @@ public class ObjetoVoadorDao {
                         rs.getString("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
-                        rs.getDouble("velocidadeAproxKm")
+                        rs.getDouble("velocidadeAproxKm"),
+                        rs.getString("distancia")
                 );
                 System.out.println(obj.toString());
                 listObj.add(obj);

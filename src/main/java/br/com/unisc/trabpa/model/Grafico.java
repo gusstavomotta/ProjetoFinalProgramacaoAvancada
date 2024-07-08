@@ -81,7 +81,8 @@ public class Grafico {
                         rs.getString("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
-                        rs.getDouble("velocidadeAproxKm")
+                        rs.getDouble("velocidadeAproxKm"),
+                        rs.getString("distancia")
                 );
                 list.add(obj);
             }
