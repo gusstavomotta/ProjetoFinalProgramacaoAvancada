@@ -18,7 +18,8 @@ import javax.swing.JPanel;
 import br.com.unisc.trabpa.model.Grafico;
 import java.awt.Color;
 import java.sql.SQLException;
-import javax.swing.BoxLayout;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class PanelGrafico extends JPanel {
    
@@ -70,17 +71,27 @@ public class PanelGrafico extends JPanel {
     }
 
     private void criarGraficoAction(ActionEvent e) {
-        LocalDate dataInicio = dateChooserInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate dataFim = dateChooserFim.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    Date dataInicioDate = dateChooserInicio.getDate();
+    Date dataFimDate = dateChooserFim.getDate();
 
-        try {
-            String filePath = Grafico.geraGrafico(dataInicio, dataFim);
-            atualizarGrafico(filePath);
-            System.out.println("Gráfico gerado com sucesso!");
-        } catch (SQLException ex) {
-            System.err.println("Erro ao gerar dados para o gráfico: " + ex.getMessage());
-        }
+    // Verifica se as datas foram selecionadas
+    if (dataInicioDate == null || dataFimDate == null) {
+        JOptionPane.showMessageDialog(this, "Por favor, selecione ambas as datas.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+        return;
     }
+
+    LocalDate dataInicio = dataInicioDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    LocalDate dataFim = dataFimDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+    try {
+        String filePath = Grafico.geraGrafico(dataInicio, dataFim);
+        atualizarGrafico(filePath);
+        System.out.println("Gráfico gerado com sucesso!");
+    } catch (SQLException ex) {
+        System.err.println("Erro ao gerar dados para o gráfico: " + ex.getMessage());
+    }
+}
+
 
     private void atualizarGrafico(String imagePath) {
         File imageFile = new File(imagePath);
