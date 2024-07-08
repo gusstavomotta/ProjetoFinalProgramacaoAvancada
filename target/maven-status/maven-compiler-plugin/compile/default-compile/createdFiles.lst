@@ -15,10 +15,12 @@ br\com\unisc\trabpa\view\form\PanelResultados.class
 br\com\unisc\trabpa\model\DadosGrafico.class
 br\com\unisc\trabpa\view\menu\MenuItem$2.class
 br\com\unisc\trabpa\dal\Conexao.class
+br\com\unisc\trabpa\view\form\PanelResultados$1.class
 br\com\unisc\trabpa\adapter\ObjetoVoadorAdapter.class
 br\com\unisc\trabpa\view\main\Main.class
 br\com\unisc\trabpa\view\main\Main$1.class
 br\com\unisc\trabpa\view\form\PanelAtualizaDados$2.class
+br\com\unisc\trabpa\view\form\PanelResultados$2.class
 br\com\unisc\trabpa\model\Relogio.class
 br\com\unisc\trabpa\view\form\PanelAtualizaDados.class
 br\com\unisc\trabpa\view\main\Main$6.class

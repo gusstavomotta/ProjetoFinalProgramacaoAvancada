@@ -182,4 +182,27 @@ public class ObjetoVoadorDao {
 
         return listObj;
     }
+public ArrayList<ObjetoVoador> obterTodosObjetosVoadores() throws SQLException {
+        ArrayList<ObjetoVoador> listObj = new ArrayList<>();
+        String query = "SELECT * FROM objeto_voador";
+        PreparedStatement st = Conexao.getInstance().prepareStatement(query);
+        try (ResultSet rs = st.executeQuery()) {
+            while (rs.next()) {
+                ObjetoVoador obj = new ObjetoVoador(
+                        rs.getString("id"),
+                        rs.getString("data"),
+                        rs.getString("nome"),
+                        rs.getDouble("diametroMinKm"),
+                        rs.getDouble("diametroMaxKm"),
+                        rs.getBoolean("risco"),
+                        rs.getString("dataDeAproximacao"),
+                        rs.getDouble("velocidadeAproxKm"),
+                        rs.getDouble("distancia")
+                );
+                listObj.add(obj);
+            }
+        }
+        return listObj;
+    }
+
 }

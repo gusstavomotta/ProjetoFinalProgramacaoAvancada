@@ -3,7 +3,6 @@ package br.com.unisc.trabpa.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-
 public class ObjetoVoador {
 
     private final String id;
@@ -13,7 +12,6 @@ public class ObjetoVoador {
     private final Double diametroMaxKm;
     private final Boolean risco;
     private final String dataDeAproximacao;
-
     private final double velocidadeAproxKm;
     private final Double distancia;
 
@@ -53,6 +51,10 @@ public class ObjetoVoador {
         return risco;
     }
 
+    public boolean isRisco() {
+        return risco != null && risco;
+    }
+
     public String getDataDeAproximacao() {
         return dataDeAproximacao;
     }
@@ -63,6 +65,19 @@ public class ObjetoVoador {
 
     public Double getDistancia() {
         return distancia;
+    }
+
+    public String getCategoriaRisco() {
+        if (distancia != null) {
+            if (distancia <= 100000) {
+                return "Alto";
+            } else if (distancia <= 1000000) {
+                return "Médio";
+            } else {
+                return "Baixo";
+            }
+        }
+        return "Desconhecido";
     }
 
     @Override
@@ -77,7 +92,7 @@ public class ObjetoVoador {
         sb.append("\nData de aproximação: ").append(dataDeAproximacao);
         sb.append("\nVelocidade de aproximação em KM/H: ").append(velocidadeAproxKm);
         sb.append("\nDistância da terra: ").append(distancia);
+        sb.append("\nCategoria de Risco: ").append(getCategoriaRisco());
         return sb.toString();
     }
-
 }
