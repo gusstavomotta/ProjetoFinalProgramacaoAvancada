@@ -3,6 +3,7 @@ package br.com.unisc.trabpa.view.main;
 import br.com.unisc.trabpa.view.form.PanelDashboard;
 import br.com.unisc.trabpa.view.form.PanelAtualizaDados;
 import br.com.unisc.trabpa.view.form.PanelGrafico;
+import br.com.unisc.trabpa.view.form.PanelResultados;
 import br.com.unisc.trabpa.view.form.PanelSobre;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,11 +50,20 @@ public class Main extends javax.swing.JFrame {
                 panelBody.revalidate();
             }
         });
-        MenuItem menuresultados = new MenuItem(iconArrow, "Resultados", null);
+        MenuItem menuresultados = new MenuItem(iconArrow, "Resultados", new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae){
+                panelBody.removeAll();
+                panelBody.add(new PanelResultados());
+                panelBody.repaint();
+                panelBody.revalidate();
+            }
+        });
 
         MenuItem menuGrafico = new MenuItem(iconArrow, "Gráfico", new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae){
+                panelBody.removeAll();
                 panelBody.add(new PanelGrafico());
                 panelBody.repaint();
                 panelBody.revalidate();
