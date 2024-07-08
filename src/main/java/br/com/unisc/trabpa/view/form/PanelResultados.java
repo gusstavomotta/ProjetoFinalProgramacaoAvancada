@@ -59,7 +59,7 @@ public class PanelResultados extends javax.swing.JPanel {
             case "Velocidade":
                 return Comparator.comparing(ObjetoVoador::getVelocidadeAproxKm).reversed();
             case "Risco":
-                return Comparator.comparing(ObjetoVoador::getCategoriaRisco);  
+                return Comparator.comparing(ObjetoVoador::getCategoriaRisco).reversed();  
             default:
                 return Comparator.comparing(ObjetoVoador::getDistancia);
         }
@@ -75,8 +75,11 @@ public class PanelResultados extends javax.swing.JPanel {
                 obj.getDiametroMaxKm(),
                 obj.getVelocidadeAproxKm(),
                 obj.getCategoriaRisco()
+                
+            
             });
         }
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -90,6 +93,8 @@ public class PanelResultados extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+
+        setAutoscrolls(true);
 
         jLabel1.setText("Ordenar por:");
 
@@ -107,7 +112,15 @@ public class PanelResultados extends javax.swing.JPanel {
             new String [] {
                 "Distância", "Tamanho do objeto", "Velocidade", "Risco"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

@@ -9,6 +9,7 @@ br\com\unisc\trabpa\view\menu\MenuItem$1.class
 br\com\unisc\trabpa\view\form\PanelGrafico.class
 br\com\unisc\trabpa\model\ObjetoVoador.class
 br\com\unisc\trabpa\view\form\PanelDashboard.class
+br\com\unisc\trabpa\view\form\PanelResultados$3.class
 br\com\unisc\trabpa\view\main\Main$2.class
 br\com\unisc\trabpa\view\main\Main$4.class
 br\com\unisc\trabpa\view\form\PanelResultados.class

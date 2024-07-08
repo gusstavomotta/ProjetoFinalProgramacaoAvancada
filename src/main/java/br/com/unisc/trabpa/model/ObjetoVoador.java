@@ -71,7 +71,7 @@ public class ObjetoVoador {
         if (distancia != null) {
             if (distancia <= 100000) {
                 return "Alto";
-            } else if (distancia <= 1000000) {
+            } else if (distancia <= 10000000) {
                 return "Médio";
             } else {
                 return "Baixo";
