@@ -64,7 +64,7 @@ public class PanelResultados extends javax.swing.JPanel {
                 obj.getDistancia(),
                 obj.getDiametroMaxKm(),
                 obj.getVelocidadeAproxKm(),
-                obj.getCategoriaRisco()
+                obj.getRisco()
                 
             
             });

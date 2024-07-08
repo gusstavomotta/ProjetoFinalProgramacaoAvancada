@@ -67,18 +67,18 @@ public class ObjetoVoador {
         return distancia;
     }
 
-    public String getCategoriaRisco() {
-        if (distancia != null) {
-            if (distancia <= 100000) {
-                return "Alto";
-            } else if (distancia <= 10000000) {
-                return "Médio";
-            } else {
-                return "Baixo";
-            }
-        }
-        return "Desconhecido";
-    }
+//    public String getCategoriaRisco() {;
+//        if (distancia != null) {
+//            if (distancia <= 100000) {
+//                return "Alto";
+//            } else if (distancia <= 10000000) {
+//                return "Médio";
+//            } else {
+//                return "Baixo";
+//            }
+//        }
+//        return "Desconhecido";
+//    }
 
     @Override
     public String toString() {
@@ -92,7 +92,7 @@ public class ObjetoVoador {
         sb.append("\nData de aproximação: ").append(dataDeAproximacao);
         sb.append("\nVelocidade de aproximação em KM/H: ").append(velocidadeAproxKm);
         sb.append("\nDistância da terra: ").append(distancia);
-        sb.append("\nCategoria de Risco: ").append(getCategoriaRisco());
+        sb.append("\nCategoria de Risco: ").append(risco);
         return sb.toString();
     }
 }
