@@ -21,12 +21,12 @@ public class ObjetoVoadorDao {
             st.setString(1, obj.getId());
             st.setString(2, obj.getData());
             st.setString(3, obj.getNome());
-            st.setString(4, obj.getDiametroMinKm());
-            st.setString(5, obj.getDiametroMaxKm());
+            st.setDouble(4, obj.getDiametroMinKm());
+            st.setDouble(5, obj.getDiametroMaxKm());
             st.setBoolean(6, obj.getRisco());
             st.setString(7, obj.getDataDeAproximacao());
             st.setDouble(8, obj.getVelocidadeAproxKm());
-            st.setString(9, obj.getDistancia());
+            st.setDouble(9, obj.getDistancia());
 
             st.executeUpdate();
             st.close();
@@ -53,12 +53,12 @@ public class ObjetoVoadorDao {
                         rs.getString("id"),
                         rs.getString("data"),
                         rs.getString("nome"),
-                        rs.getString("diametroMinKm"),
-                        rs.getString("diametroMaxKm"),
+                        rs.getDouble("diametroMinKm"),
+                        rs.getDouble("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
                         rs.getDouble("velocidadeAproxKm"),
-                        rs.getString("distancia")
+                        rs.getDouble("distancia")
                 );
                 listObj.add(obj);
 
@@ -83,12 +83,12 @@ public class ObjetoVoadorDao {
                         rs.getString("id"),
                         rs.getString("data"),
                         rs.getString("nome"),
-                        rs.getString("diametroMinKm"),
-                        rs.getString("diametroMaxKm"),
+                        rs.getDouble("diametroMinKm"),
+                        rs.getDouble("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
                         rs.getDouble("velocidadeAproxKm"),
-                        rs.getString("distancia")
+                        rs.getDouble("distancia")
                 );
                 listObj.add(obj);
 
@@ -101,7 +101,7 @@ public class ObjetoVoadorDao {
     public ArrayList<ObjetoVoador> listarObjetosProximos(String data) throws SQLException {
 
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
-        String query = "SELECT * FROM objeto_voador WHERE data >= ? order by data,distanciaMinKm, risco";
+        String query = "SELECT * FROM objeto_voador WHERE data >= ? order by data,distancia";
         PreparedStatement st = Conexao.getInstance().prepareStatement(query);
         st.setString(1, data);
 
@@ -111,12 +111,12 @@ public class ObjetoVoadorDao {
                         rs.getString("id"),
                         rs.getString("data"),
                         rs.getString("nome"),
-                        rs.getString("diametroMinKm"),
-                        rs.getString("diametroMaxKm"),
+                        rs.getDouble("diametroMinKm"),
+                        rs.getDouble("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
                         rs.getDouble("velocidadeAproxKm"),
-                        rs.getString("distancia")
+                        rs.getDouble("distancia")
                 );
                 listObj.add(obj);
 
@@ -139,12 +139,12 @@ public class ObjetoVoadorDao {
                         rs.getString("id"),
                         rs.getString("data"),
                         rs.getString("nome"),
-                        rs.getString("diametroMinKm"),
-                        rs.getString("diametroMaxKm"),
+                        rs.getDouble("diametroMinKm"),
+                        rs.getDouble("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
                         rs.getDouble("velocidadeAproxKm"),
-                        rs.getString("distancia")
+                        rs.getDouble("distancia")
                 );
                 listObj.add(obj);
             }
@@ -167,16 +167,16 @@ public class ObjetoVoadorDao {
                         rs.getString("id"),
                         rs.getString("data"),
                         rs.getString("nome"),
-                        rs.getString("diametroMinKm"),
-                        rs.getString("diametroMaxKm"),
+                        rs.getDouble("diametroMinKm"),
+                        rs.getDouble("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
                         rs.getDouble("velocidadeAproxKm"),
-                        rs.getString("distancia")
+                        rs.getDouble("distancia")
                 );
+                
                 System.out.println(obj.toString());
                 listObj.add(obj);
-
             }
         }
 

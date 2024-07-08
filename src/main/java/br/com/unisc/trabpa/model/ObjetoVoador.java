@@ -9,15 +9,15 @@ public class ObjetoVoador {
     private final String id;
     private final String data;
     private final String nome;
-    private final String diametroMinKm;
-    private final String diametroMaxKm;
+    private final Double diametroMinKm;
+    private final Double diametroMaxKm;
     private final Boolean risco;
     private final String dataDeAproximacao;
 
     private final double velocidadeAproxKm;
-    private final String distancia;
+    private final Double distancia;
 
-    public ObjetoVoador(String id, String data, String nome, String diametroMinKm, String diametroMaxKm, Boolean risco, String dataDeAproximacao, double velocidadeAproxKm, String distancia) {
+    public ObjetoVoador(String id, String data, String nome, Double diametroMinKm, Double diametroMaxKm, Boolean risco, String dataDeAproximacao, double velocidadeAproxKm, Double distancia) {
         this.id = id;
         this.data = data;
         this.nome = nome;
@@ -28,8 +28,6 @@ public class ObjetoVoador {
         this.velocidadeAproxKm = velocidadeAproxKm;
         this.distancia = distancia;
     }
-
-
 
     public String getData() {
         return data;
@@ -43,11 +41,11 @@ public class ObjetoVoador {
         return nome;
     }
 
-    public String getDiametroMinKm() {
+    public Double getDiametroMinKm() {
         return diametroMinKm;
     }
 
-    public String getDiametroMaxKm() {
+    public Double getDiametroMaxKm() {
         return diametroMaxKm;
     }
 
@@ -63,7 +61,7 @@ public class ObjetoVoador {
         return velocidadeAproxKm;
     }
 
-    public String getDistancia() {
+    public Double getDistancia() {
         return distancia;
     }
 

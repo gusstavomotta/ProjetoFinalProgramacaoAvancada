@@ -77,12 +77,12 @@ public class Grafico {
                         rs.getString("id"),
                         rs.getString("data"),
                         rs.getString("nome"),
-                        rs.getString("diametroMinKm"),
-                        rs.getString("diametroMaxKm"),
+                        rs.getDouble("diametroMinKm"),
+                        rs.getDouble("diametroMaxKm"),
                         rs.getBoolean("risco"),
                         rs.getString("dataDeAproximacao"),
                         rs.getDouble("velocidadeAproxKm"),
-                        rs.getString("distancia")
+                        rs.getDouble("distancia")
                 );
                 list.add(obj);
             }
