@@ -97,11 +97,6 @@ public class Grafico {
         ArrayList<LocalDate> dias = new ArrayList<>();
         Grafico g = new Grafico();
 
-        for (int i = 0; i < 10; i++) {
-            LocalDate currentDay = data.plusDays(i);
-            dias.add(currentDay);
-            matriz.add(g.dadosData(currentDay));
-        }
 
         return new DadosGrafico(dias, matriz);
     }

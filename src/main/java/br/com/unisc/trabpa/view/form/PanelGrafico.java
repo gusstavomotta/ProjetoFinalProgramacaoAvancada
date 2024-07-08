@@ -21,7 +21,7 @@ public class PanelGrafico extends javax.swing.JPanel {
         initComponents();
         widgetGrafico();
     }
-
+    
     private void widgetGrafico() {
         ImageIcon graficoIcon = new ImageIcon("src\\main\\java\\view\\grafObjVoador.jpg");
         JLabel graficoLabel = new JLabel(graficoIcon);

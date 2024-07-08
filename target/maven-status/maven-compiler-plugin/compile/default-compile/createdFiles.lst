@@ -6,7 +6,6 @@ br\com\unisc\trabpa\model\Grafico.class
 br\com\unisc\trabpa\view\form\PanelAtualizaDados$1.class
 br\com\unisc\trabpa\dal\Requisicao.class
 br\com\unisc\trabpa\view\menu\MenuItem$1.class
-br\com\unisc\trabpa\view\main\Main$7.class
 br\com\unisc\trabpa\view\form\PanelGrafico.class
 br\com\unisc\trabpa\model\ObjetoVoador.class
 br\com\unisc\trabpa\view\form\PanelDashboard.class

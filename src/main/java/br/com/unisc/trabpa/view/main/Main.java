@@ -34,12 +34,6 @@ public class Main extends javax.swing.JFrame {
                 panelBody.revalidate();
             }
         });
-        MenuItem menuSair = new MenuItem(iconArrow, "Sair", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                System.exit(0);
-            }
-        });
 
         MenuItem manuDados = new MenuItem(iconArrow, "Atualizar dados", new ActionListener() {
             @Override
@@ -81,7 +75,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        MenuItem menuArquivo = new MenuItem(iconArquivo, "Arquivo", null, menuDashboard, menuGrafico, menuSair);
+        MenuItem menuArquivo = new MenuItem(iconArquivo, "Arquivo", null, menuDashboard, menuGrafico);
         MenuItem menuDados = new MenuItem(iconDados, "Dados", null, manuDados, menuresultados);
         MenuItem menuAjuda = new MenuItem(iconAjuda, "Ajuda", null, menuSobre);
 
@@ -96,6 +90,7 @@ public class Main extends javax.swing.JFrame {
                 addMenu(m);
             }
         }
+        
         menus.revalidate();
     }
 
