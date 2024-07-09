@@ -92,7 +92,7 @@ public class PanelResultados extends javax.swing.JPanel {
             case "Até 100000000km" ->
                 "100000000";
             case "Até 0,5" ->
-                "0,5";
+                "0.5";
             case "Até 1" ->
                 "1";
             case "Até 2" ->
