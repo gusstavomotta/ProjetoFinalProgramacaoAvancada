@@ -4,6 +4,7 @@ import br.com.unisc.trabpa.dal.ObjetoVoadorDao;
 import br.com.unisc.trabpa.model.ObjetoVoador;
 import br.com.unisc.trabpa.model.Relogio;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,26 +19,28 @@ public class PanelDashboard extends javax.swing.JPanel {
 
     private JLabel lblDataHora;
     private javax.swing.JPanel panelBody;
-
+    
     public PanelDashboard() {
         initComponents();
         panelBody = new javax.swing.JPanel();
         setLayout(new BorderLayout());
         add(panelBody, BorderLayout.CENTER);
         adicionaWidgets();
+        
     }
 
     private void adicionaWidgets() {
         widgetRelogio();
         widgetContadorObjetos();
         widgetProximasAproximacoes();
+        
     }
 
     private void widgetRelogio() {
+        
         lblDataHora = new JLabel();
         lblDataHora.setFont(new Font("SansSerif", Font.BOLD, 24));
         lblDataHora.setHorizontalAlignment(JLabel.CENTER);
-
         panelBody.setLayout(new BorderLayout());
         panelBody.add(lblDataHora, BorderLayout.NORTH);
 
@@ -52,14 +55,13 @@ public class PanelDashboard extends javax.swing.JPanel {
     private void widgetContadorObjetos() {
         try {
             ObjetoVoadorDao objetoVoadorDao = new ObjetoVoadorDao();
-
+            
             ArrayList<ObjetoVoador> objetosProximos = objetoVoadorDao.listarObjetosProximos(new Relogio().getDataAtual());
             System.out.println("Objetos detectados: " + objetosProximos.size());
-
             JLabel lblCount = new JLabel("Objetos Próximos: " + objetosProximos.size());
             lblCount.setFont(new Font("SansSerif", Font.BOLD, 18));
             lblCount.setHorizontalAlignment(JLabel.CENTER);
-
+            this.setBackground(Color.WHITE);
             panelBody.add(lblCount, BorderLayout.SOUTH);
             panelBody.revalidate();
             panelBody.repaint();
@@ -81,6 +83,7 @@ public class PanelDashboard extends javax.swing.JPanel {
             JTable table = new JTable(model);
             JScrollPane scrollPane = new JScrollPane(table);
             panelBody.add(scrollPane, BorderLayout.CENTER);
+            panelBody.setBackground(Color.WHITE);
             panelBody.revalidate();
             panelBody.repaint();
         } catch (SQLException ex) {
