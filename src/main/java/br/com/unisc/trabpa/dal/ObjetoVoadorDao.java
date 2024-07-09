@@ -38,7 +38,7 @@ public class ObjetoVoadorDao {
 
     public ArrayList<ObjetoVoador> listarObjetosPorAtributo(String atributo, String valor, String ordena) throws SQLException, BadAttributeValueExpException {
 
-        if (!atributo.matches("^(\\D{1,})")) {
+        if (!atributo.matches("^(\\D{1,})") && !ordena.matches("^(\\D{1,})")) {
             throw new BadAttributeValueExpException("Not Today");
         }
 

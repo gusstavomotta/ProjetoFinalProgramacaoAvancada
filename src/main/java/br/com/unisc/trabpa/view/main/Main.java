@@ -104,25 +104,36 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         panelHeader = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         panelMenu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         menus = new javax.swing.JPanel();
         panelBody = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelHeader.setBackground(new java.awt.Color(0, 204, 204));
         panelHeader.setPreferredSize(new java.awt.Dimension(561, 50));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NASALYTICS.png"))); // NOI18N
+
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
         panelHeaderLayout.setHorizontalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 855, Short.MAX_VALUE)
+            .addGroup(panelHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(413, Short.MAX_VALUE))
         );
         panelHeaderLayout.setVerticalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(panelHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelHeader, java.awt.BorderLayout.PAGE_START);
@@ -144,13 +155,18 @@ public class Main extends javax.swing.JFrame {
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
         );
 
         getContentPane().add(panelMenu, java.awt.BorderLayout.LINE_START);
 
         panelBody.setBackground(new java.awt.Color(255, 255, 255));
         panelBody.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane2.setViewportView(jTextPane1);
+
+        panelBody.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
         getContentPane().add(panelBody, java.awt.BorderLayout.CENTER);
 
         setSize(new java.awt.Dimension(871, 473));
@@ -190,7 +206,10 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JPanel menus;
     private javax.swing.JPanel panelBody;
     private javax.swing.JPanel panelHeader;

@@ -4,10 +4,7 @@ import br.com.unisc.trabpa.dal.ObjetoVoadorDao;
 import br.com.unisc.trabpa.model.ObjetoVoador;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,7 +81,7 @@ public class PanelResultados extends javax.swing.JPanel {
             case "True" ->
                 "true";
             case "False" ->
-                "false";
+                "0";
             case "Até 10000000km" ->
                 "10000000";
             case "Até 50000000km" ->

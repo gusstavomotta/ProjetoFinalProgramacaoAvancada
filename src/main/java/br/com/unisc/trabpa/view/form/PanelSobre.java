@@ -20,7 +20,7 @@ public class PanelSobre extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(719, 399));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Desenvolvido por: Caio Kirst, Gustavo Motta, Mathias Dick e Victor Nascimento");
+        jLabel1.setText("Desenvolvido por: Caio Kirst, Gustavo Motta, Matheus Deicke e Victor Nascimento");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/caio.jpg"))); // NOI18N
 
@@ -48,7 +48,7 @@ public class PanelSobre extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel6))))
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
