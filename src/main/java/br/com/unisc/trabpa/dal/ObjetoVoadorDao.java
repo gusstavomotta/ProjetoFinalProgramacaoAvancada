@@ -36,14 +36,14 @@ public class ObjetoVoadorDao {
         }
     }
 
-    public ArrayList<ObjetoVoador> listarObjetosPorAtributo(String atributo, String valor) throws SQLException, BadAttributeValueExpException {
+    public ArrayList<ObjetoVoador> listarObjetosPorAtributo(String atributo, String valor, String ordena) throws SQLException, BadAttributeValueExpException {
 
         if (!atributo.matches("^(\\D{1,})")) {
             throw new BadAttributeValueExpException("Not Today");
         }
 
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
-        String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " = ?;";
+        String sql = "SELECT * FROM objeto_voador WHERE " + atributo + " = ? ORDER BY " + ordena;
         PreparedStatement st = Conexao.getInstance().prepareStatement(sql);
         st.setString(1, valor);
 
@@ -153,36 +153,43 @@ public class ObjetoVoadorDao {
         return listObj;
     }
 
-    public ArrayList<ObjetoVoador> listarPorDistancia(String dist) throws SQLException {
-
-        System.out.println(dist);
+    public ArrayList<ObjetoVoador> filtrarObjetos(String atributo, String valor, String ordena) throws SQLException, BadAttributeValueExpException {
+        System.out.println(atributo + valor);
+        
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
-        String query = "SELECT * FROM objeto_voador WHERE distancia <= ?";
-        PreparedStatement st = Conexao.getInstance().prepareStatement(query);
-        st.setString(1, dist);
-
-        try (ResultSet rs = st.executeQuery()) {
-            while (rs.next()) {
-                ObjetoVoador obj = new ObjetoVoador(
-                        rs.getString("id"),
-                        rs.getString("data"),
-                        rs.getString("nome"),
-                        rs.getDouble("diametroMinKm"),
-                        rs.getDouble("diametroMaxKm"),
-                        rs.getBoolean("risco"),
-                        rs.getString("dataDeAproximacao"),
-                        rs.getDouble("velocidadeAproxKm"),
-                        rs.getDouble("distancia")
-                );
-                
-                System.out.println(obj.toString());
-                listObj.add(obj);
-            }
+        if (!atributo.matches("^(\\D{1,})") && !ordena.matches("^(\\D{1,})")) {
+            throw new BadAttributeValueExpException("Not Today");
         }
 
+        if (valor.equals("true")) {
+            listObj = listarObjetosPorAtributo(atributo, "1", ordena);
+        } else {
+
+            String query = "SELECT * FROM objeto_voador WHERE " + atributo + " <= ? ORDER BY " + ordena + ";";
+            PreparedStatement st = Conexao.getInstance().prepareStatement(query);
+            st.setString(1, valor);
+
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    ObjetoVoador obj = new ObjetoVoador(
+                            rs.getString("id"),
+                            rs.getString("data"),
+                            rs.getString("nome"),
+                            rs.getDouble("diametroMinKm"),
+                            rs.getDouble("diametroMaxKm"),
+                            rs.getBoolean("risco"),
+                            rs.getString("dataDeAproximacao"),
+                            rs.getDouble("velocidadeAproxKm"),
+                            rs.getDouble("distancia")
+                    );
+                    listObj.add(obj);
+                }
+            }
+        }
         return listObj;
     }
-public ArrayList<ObjetoVoador> obterTodosObjetosVoadores() throws SQLException {
+
+    public ArrayList<ObjetoVoador> obterTodosObjetosVoadores() throws SQLException {
         ArrayList<ObjetoVoador> listObj = new ArrayList<>();
         String query = "SELECT * FROM objeto_voador";
         PreparedStatement st = Conexao.getInstance().prepareStatement(query);
